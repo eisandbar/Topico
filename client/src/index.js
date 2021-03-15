@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css'
+import RegisterForm from './pages/register'
 
 class LoginForm extends React.Component {
     render() {
@@ -28,7 +29,7 @@ class LoginForm extends React.Component {
     }
 }
 
-class Register extends React.Component {
+class RegisterLink extends React.Component {
     render() {
         return (
             <a href="/users/register">Register</a>
@@ -42,7 +43,7 @@ class LoginPage extends React.Component {
             <div>
                 <h1>Login</h1>
                 <LoginForm/>
-                <Register/>
+                <RegisterLink/>
             </div>
         )
     }
@@ -51,6 +52,6 @@ class LoginPage extends React.Component {
 // ==============================
 
 ReactDOM.render(
-    <LoginPage />,
+    <RegisterForm />,
     document.getElementById('root')
 )
