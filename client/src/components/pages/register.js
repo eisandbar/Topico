@@ -44,4 +44,24 @@ class RegisterForm extends React.Component {
     }
 }
 
-export default RegisterForm
+class LoginLink extends React.Component {
+    render() {
+        return (
+            <a href="users/login">Login</a>
+        )
+    }
+}
+
+class RegisterPage extends React.Component {
+    render() {
+        return (
+            <div className="register-page">
+                <h1>Register</h1>
+                <RegisterForm/>
+                <p>Have an account? <LoginLink/></p>
+            </div>
+        )
+    }
+}
+
+export default RegisterPage
