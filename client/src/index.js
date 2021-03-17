@@ -9,6 +9,6 @@ import ChatPage from './components/pages/chat'
 // ==============================
 
 ReactDOM.render(
-    <LoginPage />,
+    <ChatPage />,
     document.getElementById('root')
 )
