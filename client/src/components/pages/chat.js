@@ -1,8 +1,13 @@
 import React, {Component} from 'react'
-import testMessages from '../../test/testMessages'
-import MessageContainer from '../chat_parts/MessageContainer'
-import Profile from '../chat_parts/Profile'
 
+import testMessages from '../../test/testMessages'
+import testRooms from '../../test/testRooms'
+
+import MessageContainer from '../chat_parts/MessageContainer'
+import MessageTextBox from '../chat_parts/MessageTextBox'
+import Profile from '../chat_parts/Profile'
+import RoomContainer from '../chat_parts/RoomContainer'
+import MessageSendButton from '../chat_parts/MessageSendButton'
 
 
 class ChatPage extends Component {
@@ -11,9 +16,12 @@ class ChatPage extends Component {
             <div>
                 <div className="room-column">
                     <Profile username={'User'}/>
+                    <RoomContainer rooms={testRooms}/>
                 </div>
                 <div className="chat-column">
                     <MessageContainer messages={testMessages}/>
+                    <MessageTextBox />
+                    <MessageSendButton />
                 </div>
                 <div className="users-column">
 
