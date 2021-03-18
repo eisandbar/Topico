@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 
-import testMessages from '../../test/testMessages'
-import testRooms from '../../test/testRooms'
+import testMessages from '../../testData/testMessages'
+import testRooms from '../../testData/testRooms'
 
 import MessageContainer from '../chat_parts/MessageContainer'
 import MessageTextBox from '../chat_parts/MessageTextBox'
