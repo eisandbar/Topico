@@ -10,26 +10,21 @@ import RoomContainer from '../chat_parts/RoomContainer'
 import MessageSendButton from '../chat_parts/MessageSendButton'
 
 
-class ChatPage extends Component {
-    render() {
-        return (
-            <div>
-                <div className="room-column">
-                    <Profile username={'User'}/>
-                    <RoomContainer rooms={testRooms}/>
-                </div>
-                <div className="chat-column">
-                    <MessageContainer messages={testMessages}/>
-                    <MessageTextBox />
-                    <MessageSendButton />
-                </div>
-                <div className="users-column">
-
-                </div>
+const ChatPage = () => {
+    return (
+        <div className="full-height">
+            <div className="room-column">
+                <Profile username={'User'}/>
+                <RoomContainer rooms={testRooms}/>
             </div>
+            <div className="chat-column">
+                <MessageContainer messages={testMessages}/>
+                <MessageTextBox />
+                <MessageSendButton />
+            </div>
+        </div>
 
-        )
-    }
+    )
 }
 
 export default ChatPage

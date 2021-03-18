@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Avatar from './Avatar'
 
 const Profile = (props) => {
@@ -6,6 +7,7 @@ const Profile = (props) => {
         <div className="profile">
             <Avatar/>
             <div className="profile-username">{props.username}</div>
+            <Link to="/login">Logout</Link>
         </div>
     )
 }
