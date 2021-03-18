@@ -1,24 +1,25 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 
+import useFormInput from '../hooks/useFormInput'
+
 const LoginForm = () => {
+    const email = useFormInput
+    const password = useFormInput
+
+    const handleSubmit = () => {
+        return
+    }
+
     return (
-        <form>
-            <div>
+        <form onSubmit={handleSubmit}>
+            <div className="form-input">
                 <label for="email">Email</label>
-                <input
-                    name="email"
-                    type="email"
-                    placeholder="Enter Email"
-                />
+                <input type="email" {...email} placeholder="Enter Email" />
             </div>
-            <div>
+            <div className="form-input">
                 <label for="password">Password</label>
-                <input
-                    name="password"
-                    type="password"
-                    placeholder="Enter Password"
-                />
+                <input type="password" {...password} placeholder="Enter Password" />
             </div>
             <button type="submit" class="btn btn-primary btn-block">Login</button>
         </form>

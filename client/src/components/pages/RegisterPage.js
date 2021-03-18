@@ -1,40 +1,35 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import useFormInput from '../hooks/useFormInput'
+
 const RegisterForm = () => {
+    const name = useFormInput("")
+    const email = useFormInput("")
+    const password = useFormInput("")
+    const password2 = useFormInput("")
+
+    const handleSubmit = () => {
+        return
+    }
+
     return (
-        <form>
-            <div className="name-form">
+        <form onSubmit={handleSubmit}>
+            <div className="form-input">
                 <label for="name">Name</label>
-                <input
-                    name="name"
-                    type="name"
-                    placeholder="Enter Name"
-                />
+                <input type="name" {...name} placeholder="Enter Name" />
             </div>
-            <div className="email-form">
+            <div className="form-input">
                 <label for="email">Email</label>
-                <input
-                    name="email"
-                    type="email"
-                    placeholder="Enter Email"
-                />
+                <input type="email" {...email} placeholder="Enter Email" />
             </div>
-            <div className="password-form">
+            <div className="form-input">
                 <label for="password">Password</label>
-                <input
-                    name="password"
-                    type="password"
-                    placeholder="Enter password"
-                />
+                <input type="password" {...password} placeholder="Enter Password" />
             </div>
-            <div className="password-form">
+            <div className="form-input">
                 <label  for="password2">Confirm Password</label>
-                <input
-                    name="password2"
-                    type="password"
-                    placeholder="Confirm Password"
-                />
+                <input type="password" {...password2} placeholder="Confirm Password" />
             </div>
             <button type="submit" class="btn btn-primary btn-block">
                 Register
