@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class RegisterForm extends React.Component {
     render() {
@@ -28,7 +29,7 @@ class RegisterForm extends React.Component {
                         placeholder="Enter password"
                     />
                 </div>
-                <div className="password2-form">
+                <div className="password-form">
                     <label  for="password2">Confirm Password</label>
                     <input
                         name="passwrod2"
@@ -47,7 +48,7 @@ class RegisterForm extends React.Component {
 class LoginLink extends React.Component {
     render() {
         return (
-            <a href="users/login">Login</a>
+            <Link to="users/login">Login</Link>
         )
     }
 }

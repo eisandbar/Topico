@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 class LoginForm extends React.Component {
     render() {
@@ -29,7 +30,7 @@ class LoginForm extends React.Component {
 class RegisterLink extends React.Component {
     render() {
         return (
-            <a href="/users/register">Register</a>
+            <Link to="/register">Register</Link>
         )
     }
 }
