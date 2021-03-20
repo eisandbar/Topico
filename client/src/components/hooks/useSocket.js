@@ -15,15 +15,19 @@ export const useSocket = ({username, room}) => {
 
         // On incoming messages
         socketRef.current.on("chat message", message => {
-            setMessages([...messages, message])
+            const newMessage = {
+                text: message.msg,
+                time: undefined,
+                id: messages.length + 1
+            }
+            setMessages(messages => [...messages, newMessage])
         })
 
         return () => socketRef.current.disconnect()
-    })
+    }, [username, room])
 
     const sendMessage = (message) => {
         socketRef.current.emit("chat message", message)
-        setMessages([...messages, message])
     }
 
     return (
