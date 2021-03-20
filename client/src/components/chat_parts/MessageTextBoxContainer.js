@@ -3,22 +3,22 @@ import React, { useState } from 'react'
 import MessageSendButton from './MessageSendButton'
 import MessageTextBox from './MessageTextBox'
 
-const MessageTextBoxContainer = () => {
+const MessageTextBoxContainer = (props) => {
     const [textInput, setTextInput] = useState("")
 
     const handleChange = (e) => {
         setTextInput(e.target.value)
-
     }
 
-    const handlleSubmit = (e) => {
-
+    const handleSubmit = (e) => {
+        props.sendMessage(textInput)
+        setTextInput("")
     }
 
     return (
         <div>
-            <MessageTextBox />
-            <MessageSendButton />
+            <MessageTextBox value={textInput} handleChange={handleChange} />
+            <MessageSendButton handleSubmit={handleSubmit} />
         </div>
     )
 }

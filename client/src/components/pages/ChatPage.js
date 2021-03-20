@@ -15,8 +15,8 @@ const useQuery = () => {
 }
 
 const ChatPage = (props) => {
-    const [messages, sendMessages] = useSocket({username:"Tester", room:"React-test"})
-    const [rooms, setRooms] = useState("")
+    const [messages, sendMessage] = useSocket({username:"Tester", room:"React-test"})
+    const [rooms, setRooms] = useState(testRooms)
     let query = useQuery()
     console.log(query.get("cr"))
 
@@ -24,11 +24,11 @@ const ChatPage = (props) => {
         <div className="full-height">
             <div className="room-column">
                 <Profile username={'User'}/>
-                <RoomContainer rooms={testRooms}/>
+                <RoomContainer rooms={rooms}/>
             </div>
             <div className="chat-column">
                 <MessageContainer messages={messages}/>
-                <MessageTextBoxContainer />
+                <MessageTextBoxContainer sendMessage={sendMessage} />
             </div>
         </div>
 
