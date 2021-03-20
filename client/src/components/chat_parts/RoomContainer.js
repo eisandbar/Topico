@@ -5,7 +5,7 @@ const RoomContainer = (props) => {
     return (
         <div className="room-container">
             <ul>
-                {props.rooms.map((room) => <Room room={room}/>)}
+                {props.rooms.map((room) => <Room key={room.id} room={room}/>)}
             </ul>
         </div>
     )
