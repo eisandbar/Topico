@@ -5,7 +5,7 @@ const MessageContainer = (props) => {
     return (
         <div className="message-container">
             <ul>
-                {props.messages.map((message) => <Message message={message}/>)}
+                {props.messages.map((message) => <Message key={message.id} message={message}/>)}
             </ul>
         </div>
 

@@ -3,7 +3,7 @@ import Avatar from './Avatar'
 
 const Message = (props) => {
     return (
-        <li key={props.message.id} className='message'>
+        <li className='message'>
             <Avatar/>
             <div className="text-wrapper">
                 <div className="text">

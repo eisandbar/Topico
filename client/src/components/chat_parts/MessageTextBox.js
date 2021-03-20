@@ -1,6 +1,7 @@
 import React from 'react'
 
 const MessageTextBox = (props) => {
+
     return (
         <div className="message-text-box">
             <input 
