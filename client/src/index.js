@@ -15,9 +15,9 @@ fetch("http://localhost:3000/test", {method: 'GET'})
     .then(resJson => {
         
         console.log("Hi")
-        return resJson.text()
+        return resJson.json()
     })
-    .then(text => console.log(text))
+    .then(res => console.log(res.data))
 
 const Routing = ()  => {
     return (
