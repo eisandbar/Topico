@@ -8,7 +8,7 @@ import Profile from "../chat_parts/Profile"
 
 const RoomPage = (props) => {
     const username = props.username || "Tester"
-    const [rooms, setRooms] = useState(testRooms)
+    const [rooms, ] = useState(testRooms)
 
     return (
         <div className="full-height">
