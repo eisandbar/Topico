@@ -13,12 +13,12 @@ html, body {
   height: 100%;
 }
 
-.room-column {
+.nav-column {
   float: left;
   width: 20%;
   height: 100%;
   }
-.chat-column {
+.content-column {
   float: left;
   width: 80%;
   height: 100%;
@@ -47,11 +47,10 @@ ul, ol {
   padding: 10px;
   margin: 10px 0;
   height: 80%;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 .room {
-  float: left;
   text-align: left;
   border: 4px solid #66224f;
   background-color: #3b0b2b;
@@ -62,7 +61,6 @@ ul, ol {
 }
 
 .room-container {
-  float: left;
   background-color: #ecc0de;
   border: 4px #66224f;
   border-style: solid;
@@ -70,7 +68,7 @@ ul, ol {
   padding: 10px;
   margin: 10px 0;
   height: 90%;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 .profile {

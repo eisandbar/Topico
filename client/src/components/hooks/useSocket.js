@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {io} from 'socket.io-client'
 import testMessages from '../../testData/testMessages'
 
@@ -18,7 +18,7 @@ export const useSocket = ({username, room}) => {
             const newMessage = {
                 text: message.msg,
                 time: undefined,
-                id: messages.length + 1
+                id: message.id
             }
             setMessages(messages => [...messages, newMessage])
         })

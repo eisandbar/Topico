@@ -1,13 +1,10 @@
-import React, {Component, useState} from 'react'
+import React from 'react'
 import { useLocation } from 'react-router'
-
-import testMessages from '../../testData/testMessages'
-import testRooms from '../../testData/testRooms'
+import { Link } from 'react-router-dom'
 
 import MessageContainer from '../chat_parts/MessageContainer'
 import MessageTextBoxContainer from '../chat_parts/MessageTextBoxContainer'
 import Profile from '../chat_parts/Profile'
-import RoomContainer from '../chat_parts/RoomContainer'
 import { useSocket } from '../hooks/useSocket'
 
 const useQuery = () => {
@@ -15,18 +12,19 @@ const useQuery = () => {
 }
 
 const ChatPage = (props) => {
-    const [messages, sendMessage] = useSocket({username:"Tester", room:"React-test"})
-    const [rooms, setRooms] = useState(testRooms)
     let query = useQuery()
-    console.log(query.get("cr"))
+    const username = props.username || "Tester"
+    const [messages, sendMessage] = useSocket({username: username, room: query.get("cr")})
 
     return (
         <div className="full-height">
-            <div className="room-column">
-                <Profile username={'User'}/>
-                <RoomContainer rooms={rooms}/>
+            <div className="nav-column">
+                <Profile username={username}/>
+                <Link to="/rooms"> Back </Link>
+                <br></br>
+                <Link to="/login">Logout</Link>
             </div>
-            <div className="chat-column">
+            <div className="content-column">
                 <MessageContainer messages={messages}/>
                 <MessageTextBoxContainer sendMessage={sendMessage} />
             </div>
