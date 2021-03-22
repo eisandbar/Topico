@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import fetch from 'node-fetch'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 import './index.css'
@@ -9,6 +10,14 @@ import LoginPage from './components/pages/LoginPage'
 import ChatPage from './components/pages/ChatPage'
 import WelcomePage from './components/pages/WelcomePage';
 import RoomPage from './components/pages/RoomPage';
+
+fetch("http://localhost:3000/test", {method: 'GET'})
+    .then(resJson => {
+        
+        console.log("Hi")
+        return resJson.text()
+    })
+    .then(text => console.log(text))
 
 const Routing = ()  => {
     return (
