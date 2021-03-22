@@ -2,8 +2,6 @@ const express = require('express')
 const app = express()
 const http = require('http').Server(app)
 const io = require('socket.io')(http)
-const path = require('path')
-const fetch = require('node-fetch')
 
 import findUser from "./utils/sql/findUser"
 import formatMessage from "./utils/formatMessage"
@@ -14,10 +12,6 @@ import * as types from "./utils/types"
 //app.use(express.static(__dirname + "/public"))
 //app.use(express.urlencoded({extended: false}))
 app.use('/', require('./routes/index'))
-
-fetch("http://localhost:3080/test", {method: 'GET'})
-    .then(resJson => resJson.text())
-    .then(text => console.log(text))
 
 io.on('connection', socket => {
     socket.on('join room', ({username, room}) => {             
