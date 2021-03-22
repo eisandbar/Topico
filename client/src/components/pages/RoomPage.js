@@ -10,7 +10,7 @@ const RoomPage = (props) => {
     const [rooms, setRooms] = useState(testRooms)
 
     return (
-        <div className="room-page">
+        <div className="full-height">
             <div className="nav-column">
                 <Profile />
                 <Link to="/login"> Logout </Link>
