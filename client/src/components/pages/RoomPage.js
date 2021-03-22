@@ -7,12 +7,13 @@ import RoomContainer from "../chat_parts/RoomContainer"
 import Profile from "../chat_parts/Profile"
 
 const RoomPage = (props) => {
+    const username = props.username || "Tester"
     const [rooms, setRooms] = useState(testRooms)
 
     return (
         <div className="full-height">
             <div className="nav-column">
-                <Profile />
+                <Profile username={username} />
                 <Link to="/login"> Logout </Link>
             </div>
             <div className="content-column">

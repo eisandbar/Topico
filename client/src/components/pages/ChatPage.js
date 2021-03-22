@@ -12,14 +12,14 @@ const useQuery = () => {
 }
 
 const ChatPage = (props) => {
-    const [messages, sendMessage] = useSocket({username:"Tester", room:"React-test"})
     let query = useQuery()
-    console.log(query.get("cr"))
+    const username = props.username || "Tester"
+    const [messages, sendMessage] = useSocket({username: username, room: query.get("cr")})
 
     return (
         <div className="full-height">
             <div className="nav-column">
-                <Profile username={'User'}/>
+                <Profile username={username}/>
                 <Link to="/rooms"> Back </Link>
                 <br></br>
                 <Link to="/login">Logout</Link>
