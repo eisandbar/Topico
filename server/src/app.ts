@@ -10,7 +10,12 @@ import userLeave from "./utils/sql/userLeave"
 import * as types from "./utils/types"
 
 //app.use(express.static(__dirname + "/public"))
+
+// Body parsing
 //app.use(express.urlencoded({extended: false}))
+app.use(express.json())
+
+// Routes
 app.use('/', require('./routes/index'))
 
 io.on('connection', socket => {
