@@ -14,14 +14,18 @@ const LoginForm = () => {
     return (
         <form onSubmit={handleSubmit}>
             <div className="form-input">
-                <label for="email">Email</label>
-                <input type="email" {...email} placeholder="Enter Email" />
+                <label>
+                    Email
+                    <input type="email" {...email} placeholder="Enter Email" />
+                </label>
             </div>
             <div className="form-input">
-                <label for="password">Password</label>
-                <input type="password" {...password} placeholder="Enter Password" />
+                <label> 
+                    Passsword
+                    <input type="password" {...password} placeholder="Enter Password" />
+                </label>
             </div>
-            <button type="submit" class="btn btn-primary btn-block">Login</button>
+            <button type="submit" className="btn btn-primary btn-block">Login</button>
         </form>
     )
 }
