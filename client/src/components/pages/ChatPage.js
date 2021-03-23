@@ -7,12 +7,8 @@ import MessageTextBoxContainer from '../chat_parts/MessageTextBoxContainer'
 import Profile from '../chat_parts/Profile'
 import { useSocket } from '../hooks/useSocket'
 
-const useQuery = () => {
-    return new URLSearchParams(useLocation().search)
-}
-
 const ChatPage = (props) => {
-    let query = useQuery()
+    let query = new URLSearchParams(useLocation().search)
     const username = props.username || "Tester"
     const [messages, sendMessage] = useSocket({username: username, room: query.get("cr")})
 
