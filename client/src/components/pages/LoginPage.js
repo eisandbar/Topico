@@ -1,14 +1,28 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 
+import { sendPost } from '../../utils/sendPost'
 import useFormInput from '../hooks/useFormInput'
 
 const LoginForm = () => {
-    const email = useFormInput
-    const password = useFormInput
+    const email = useFormInput()
+    const password = useFormInput()
+    const history = useHistory()
 
-    const handleSubmit = () => {
-        return
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        const formInput = {
+            data: {
+                email: email,
+                password: password,
+            },
+            url: "/login",
+        }
+        const res = await sendPost(formInput)
+        console.log(res)
+        if (res.success) {
+            history.push(res.redirectUrl)
+        }
     }
 
     return (
