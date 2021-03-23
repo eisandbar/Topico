@@ -3,7 +3,40 @@ const router = express.Router()
 // import {ensureAuthenticated} from "../config/auth"
 
 //router.get('/register')
-//router.post('/register')
+router.post('/register', (req, res) => {
+    console.log(req.body)
+    const {name, email, password, password2} = req.body
+    let errors = []
+    console.log(`name: ${name}| email: ${email}| password: ${password}`)
+    if (!name || !email || !password || !password2) {
+        errors.push({msg: 'Please fill in all fields.'})
+    }
+
+    if (password !== password2) {
+        errors.push({msg: 'Passwords do not match'})
+    }
+
+    if (password.length < 8) {
+        errors.push({msg: 'Password must be at least 8 characters long.'})
+    }
+
+    if (errors.length > 0) {
+        res.json(JSON.stringify({
+            errors,
+            name,
+            email,
+            password,
+            password2
+        }))
+        console.log("replied")
+    } else {
+        console.log("redirect attempt")
+        res.json(JSON.stringify({
+            success:true,
+            redirectUrl: '/login'
+        }))
+    }
+})
 
 //router.get('/login')
 //router.post('/login')
