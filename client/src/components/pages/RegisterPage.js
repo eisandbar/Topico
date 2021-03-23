@@ -1,7 +1,7 @@
-import fetch from 'node-fetch';
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
+import { sendPost } from '../../utils/sendPost';
 import useFormInput from '../hooks/useFormInput'
 
 const RegisterForm = () => {
@@ -14,18 +14,19 @@ const RegisterForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const formInput = {
-            name: name.value,
-            email: email.value,
-            password: password.value,
-            password2: password2.value,
+            data: {
+                name: name.value,
+                email: email.value,
+                password: password.value,
+                password2: password2.value,
+            },
+            url: "/register",
         }
 
         const res = await sendPost(formInput)
         console.log(res)
         if (res.success) {
             history.push(res.redirectUrl)
-            console.log("HEre")
-            console.log(history.location)
         }
     }
 
@@ -64,7 +65,7 @@ const RegisterForm = () => {
 
 const LoginLink = () => {
     return (
-        <Link to="users/login">Login</Link>
+        <Link to="/login">Login</Link>
     )
 }
 
@@ -78,26 +79,4 @@ const RegisterPage = () => {
     )
 }
 
-const sendPost = async (formInput) => new Promise((resolve, reject) => {
-    console.log(formInput)
-    fetch("http://localhost:3000/register", {
-        method: "POST",
-        body: JSON.stringify(formInput),
-        headers: {"Content-Type": "application/json"},
-    })
-    .then(res => res.json())
-    .then(resJson => {
-        const {
-            errors,
-            name,
-            email,
-            password,
-            password2
-        } = JSON.parse(resJson)
-    console.log(JSON.parse(resJson))
-    if(errors) console.log(...errors)
-    console.log(name, email, password, password2)
-    return resolve(JSON.parse(resJson))
-    })
-})
 export default RegisterPage
