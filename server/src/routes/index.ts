@@ -39,7 +39,18 @@ router.post('/register', (req, res) => {
 })
 
 //router.get('/login')
-//router.post('/login')
+router.post('/login', (req, res) => {
+    const {email, password} = req.body
+    console.log("login post")
+    console.log(req.body)
+    if(email && password) {
+        console.log("replied")
+        res.json(JSON.stringify({
+            success:true,
+            redirectUrl: '/rooms'
+        }))
+    }
+})
 
 router.get('/test', (req, res) => {
     res.json({data: "hello"})
