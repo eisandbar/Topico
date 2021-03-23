@@ -16,13 +16,13 @@ General Idea:
     - sql or mongo DB
     
 Next Steps:
-  -Auth on client
-  -Comments
-  -Auth on server
+  - Auth on client
+  - Comments
+  - Auth on server
 
 Progress:
-  -Pages for register and login
-  -Pages for rooms and chat
-  -Socket connection to server
-  -Fetching rooms from server
-  -Posting formInputs to server
+  - Pages for register and login
+  - Pages for rooms and chat
+  - Socket connection to server
+  - Fetching rooms from server
+  - Posting formInputs to server
