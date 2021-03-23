@@ -19,6 +19,8 @@ Next Steps:
   - Auth on client
   - Comments
   - Auth on server
+  - Proper SQL functions, move to new DB
+  - Proper route handling
 
 Progress:
   - Pages for register and login
