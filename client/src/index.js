@@ -10,6 +10,8 @@ import LoginPage from './components/pages/LoginPage'
 import ChatPage from './components/pages/ChatPage'
 import WelcomePage from './components/pages/WelcomePage';
 import RoomPage from './components/pages/RoomPage';
+import { PrivateRoute } from './components/auth/PrivateRoute';
+import { ProvideAuth } from './components/auth/auth';
 
 fetch("http://localhost:3000/test", {method: 'GET'})
     .then(resJson => {
@@ -21,15 +23,25 @@ fetch("http://localhost:3000/test", {method: 'GET'})
 
 const Routing = ()  => {
     return (
-        <Router>
-            <Switch>
-                <Route path="/login" component={LoginPage}/>
-                <Route path="/register" component={RegisterPage} />
-                <Route path="/chat" component={ChatPage} />
-                <Route path="/rooms" component={RoomPage} />
-                <Route path="/" exact component={WelcomePage} />
-            </Switch>
-        </Router>
+        <ProvideAuth>
+            <Router>
+                <Switch>
+                    <Route path="/login">
+                        <LoginPage />
+                    </Route>
+                    <Route path="/register">
+                        <RegisterPage />
+                    </Route>
+                    <PrivateRoute path="/chat">
+                        <ChatPage />
+                    </PrivateRoute>
+                    <PrivateRoute path="/rooms">
+                        <RoomPage />
+                    </PrivateRoute>
+                    <Route path="/" exact component={WelcomePage} />
+                </Switch>
+            </Router>
+        </ProvideAuth>
     )
 }
 
