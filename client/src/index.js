@@ -11,7 +11,7 @@ import ChatPage from './components/pages/ChatPage'
 import WelcomePage from './components/pages/WelcomePage';
 import RoomPage from './components/pages/RoomPage';
 import { PrivateRoute } from './components/auth/PrivateRoute';
-import { ProvideAuth } from './components/auth/auth';
+import { ProvideAuth } from './components/auth/ProvideAuth';
 
 fetch("http://localhost:3000/test", {method: 'GET'})
     .then(resJson => {
