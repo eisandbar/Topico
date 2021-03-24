@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import LoginForm from '../login_parts/LoginForm'
+import ErrorBox from '../register_parts/ErrorBox'
 
 /* 
     Login page component.
@@ -8,11 +9,14 @@ import LoginForm from '../login_parts/LoginForm'
 */
 
 const LoginPage = () => {
+    const [errors, setErrors] = useState([])
+
     return (
         <div>
             <h1>Login</h1>
-            <LoginForm />
+            <LoginForm setErrors={setErrors} />
             <Link to="/register">Register</Link>
+            <ErrorBox errors={errors} />
         </div>
     )
 }

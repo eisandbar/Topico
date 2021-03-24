@@ -33,7 +33,9 @@ const Routing = ()  => {
                     <PrivateRoute path="/rooms">
                         <RoomPage />
                     </PrivateRoute>
-                    <Route path="/" exact component={WelcomePage} />
+                    <Route path="/" exact >
+                        <WelcomePage />
+                    </Route>
                 </Switch>
             </Router>
         </ProvideAuth>
