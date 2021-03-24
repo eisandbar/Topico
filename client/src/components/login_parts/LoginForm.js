@@ -4,24 +4,32 @@ import { useHistory} from 'react-router-dom'
 import { sendPost } from '../../utils/sendPost'
 import useFormInput from '../hooks/useFormInput'
 
+/* 
+    Login form component.
+
+    On submit POSTs the form inputs to the server.
+    The authentication status should be changed here on success.
+    Not sure whether server-side or client-side redirects are better.
+*/
+
 const LoginForm = () => {
     const email = useFormInput()
     const password = useFormInput()
     const history = useHistory()
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
-        const formInput = {
+        e.preventDefault() // Otherwise the history.push doesn't redirect
+        const formInput = { // Data needed for the POST
             data: {
                 email: email,
                 password: password,
             },
             url: "/login",
         }
-        const res = await sendPost(formInput)
+        const res = await sendPost(formInput) // POSTs the data
         console.log(res)
-        if (res.success) {
-            history.push(res.redirectUrl)
+        if (res.success) { // If login was successful
+            history.push(res.redirectUrl) // Redirect to destination.
         }
     }
 

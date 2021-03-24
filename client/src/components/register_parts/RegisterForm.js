@@ -4,6 +4,12 @@ import { useHistory } from 'react-router-dom';
 import { sendPost } from '../../utils/sendPost';
 import useFormInput from '../hooks/useFormInput'
 
+/* 
+    Register form component
+
+    On submit POSTs the form inputs to the server
+*/
+
 const RegisterForm = (props) => {
     const name = useFormInput("as")
     const email = useFormInput("asas@a")
@@ -12,8 +18,8 @@ const RegisterForm = (props) => {
     const history = useHistory()
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
-        const formInput = {
+        e.preventDefault() // Otherwise the history.push redirect doesn't work
+        const formInput = { // Data to POST
             data: {
                 name: name.value,
                 email: email.value,
@@ -23,11 +29,11 @@ const RegisterForm = (props) => {
             url: "/register",
         }
 
-        const res = await sendPost(formInput)
+        const res = await sendPost(formInput) // POSTing to server
         console.log(res)
-        props.setErrors([...res.errors].map(error => error.msg))
-        if (res.success) {
-            history.push(res.redirectUrl)
+        props.setErrors([...res.errors].map(error => error.msg)) // sends to parent all the errors
+        if (res.success) { // If registering was successful
+            history.push(res.redirectUrl) // Redirects to /login
         }
     }
 
