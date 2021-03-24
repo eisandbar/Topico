@@ -2,6 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import LoginForm from '../login_parts/LoginForm'
 
+/* 
+    Login page component.
+    Most of the work is done in the LoginForm component.
+*/
+
 const LoginPage = () => {
     return (
         <div>

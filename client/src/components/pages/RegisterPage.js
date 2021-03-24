@@ -3,6 +3,12 @@ import { Link } from 'react-router-dom';
 import ErrorBox from '../register_parts/ErrorBox';
 import RegisterForm from '../register_parts/RegisterForm';
 
+/* 
+    Register page component.
+    Most of the work is done in the RegisterForm component.
+    RegisterForm sets the errors, which are displayed in the ErrorBox.
+*/
+
 const RegisterPage = () => {
     const [errors, setErrors] = useState([])
 
