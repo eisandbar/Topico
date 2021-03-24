@@ -9,12 +9,12 @@ import { useAuth } from './ProvideAuth'
 */
 
 export const PrivateRoute = ({children, ...rest}) => {
-    let auth = useAuth() // Uses the auth context provided by the parent ProvideAuth component
-
+    const auth = useAuth() // Uses the auth context provided by the parent ProvideAuth component
     return (
         <Route 
             {...rest} // Gives the other parameters in the prop
             render={({location}) => {
+                console.log(auth.user)
                 return auth.user ? ( // If the user != null
                     children // Render the childer
                 ) : (
