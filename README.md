@@ -16,9 +16,10 @@ General Idea:
     - sql or mongo DB
     
 Next Steps:
-  - Auth on client
-  - Comments
-  - Auth on server
+  - Auth on server: 
+    - sessions
+    - encryption
+    - passport
   - Proper SQL functions, move to new DB
   - Proper route handling
 
@@ -28,3 +29,5 @@ Progress:
   - Socket connection to server
   - Fetching rooms from server
   - Posting formInputs to server
+  - Auth on client (context, redirects, login functions)
+  - Commented all code above ^
