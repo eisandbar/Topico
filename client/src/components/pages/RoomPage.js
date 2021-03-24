@@ -5,6 +5,12 @@ import RoomContainer from "../chat_parts/RoomContainer"
 import Profile from "../chat_parts/Profile"
 import { useRooms } from "../hooks/useRooms"
 
+/* 
+    Room page component.
+    Currently the default page after logging in.
+    Room components in RoomContainer component are links to the rooms.
+*/
+
 const RoomPage = (props) => {
     const username = props.username || "Tester"
     const [rooms, createRoom] = useRooms()
