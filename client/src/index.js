@@ -1,25 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import fetch from 'node-fetch'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
+// Styling
 import './index.css'
 
+// Page Components
 import RegisterPage from './components/pages/RegisterPage'
 import LoginPage from './components/pages/LoginPage'
 import ChatPage from './components/pages/ChatPage'
 import WelcomePage from './components/pages/WelcomePage';
 import RoomPage from './components/pages/RoomPage';
+
+// Authorization components
 import { PrivateRoute } from './components/auth/PrivateRoute';
 import { ProvideAuth } from './components/auth/ProvideAuth';
-
-fetch("http://localhost:3000/test", {method: 'GET'})
-    .then(resJson => {
-        
-        console.log("Hi")
-        return resJson.json()
-    })
-    .then(res => console.log(res.data))
 
 const Routing = ()  => {
     return (
