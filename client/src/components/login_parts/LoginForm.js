@@ -21,8 +21,8 @@ const LoginForm = (props) => {
     const handleSubmit = async (e) => {
         e.preventDefault() // Otherwise the history.push doesn't redirect
         const data = { // Data needed for the POST
-            email: email,
-            password: password,
+            email: email.value,
+            password: password.value,
         }
         const res = await auth.signin(data)
         console.log(res)
