@@ -3,6 +3,7 @@ const router = express.Router()
 // import {ensureAuthenticated} from "../config/auth"
 
 //router.get('/register')
+
 router.post('/register', (req, res) => {
     console.log(req.body)
     const {name, email, password, password2} = req.body
@@ -39,6 +40,7 @@ router.post('/register', (req, res) => {
 })
 
 //router.get('/login')
+
 router.post('/login', (req, res) => {
     const {email, password} = req.body
     console.log("login post")
@@ -46,7 +48,7 @@ router.post('/login', (req, res) => {
     if(email && password) {
         console.log("replied")
         res.json(JSON.stringify({
-            success:true,
+            userId: "User Id",
             redirectUrl: '/rooms'
         }))
     }

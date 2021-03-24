@@ -1,7 +1,7 @@
 import React from 'react'
 import { useHistory} from 'react-router-dom'
 
-import { sendPost } from '../../utils/sendPost'
+import { useAuth } from '../auth/ProvideAuth'
 import useFormInput from '../hooks/useFormInput'
 
 /* 
@@ -12,25 +12,23 @@ import useFormInput from '../hooks/useFormInput'
     Not sure whether server-side or client-side redirects are better.
 */
 
-const LoginForm = () => {
-    const email = useFormInput()
-    const password = useFormInput()
+const LoginForm = (props) => {
+    const email = useFormInput("")
+    const password = useFormInput("")
     const history = useHistory()
+    const auth = useAuth()
 
     const handleSubmit = async (e) => {
         e.preventDefault() // Otherwise the history.push doesn't redirect
-        const formInput = { // Data needed for the POST
-            data: {
-                email: email,
-                password: password,
-            },
-            url: "/login",
+        const data = { // Data needed for the POST
+            email: email,
+            password: password,
         }
-        const res = await sendPost(formInput) // POSTs the data
+        const res = await auth.signin(data)
         console.log(res)
-        if (res.success) { // If login was successful
+        res.userId ? ( // If login was successful
             history.push(res.redirectUrl) // Redirect to destination.
-        }
+         ) : props.setErrors(res.errors)
     }
 
     return (
