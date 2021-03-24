@@ -1,6 +1,10 @@
 import React from 'react'
 import Avatar from './Avatar'
 
+/* 
+    Basic message component
+*/
+
 const Message = (props) => {
     return (
         <li className='message'>

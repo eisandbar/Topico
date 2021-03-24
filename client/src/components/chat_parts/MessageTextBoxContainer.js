@@ -3,6 +3,10 @@ import React, { useState } from 'react'
 import MessageSendButton from './MessageSendButton'
 import MessageTextBox from './MessageTextBox'
 
+/* 
+    Container for the message input and send button
+*/
+
 const MessageTextBoxContainer = (props) => {
     const [textInput, setTextInput] = useState("")
 

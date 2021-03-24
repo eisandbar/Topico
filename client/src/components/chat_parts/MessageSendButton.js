@@ -1,5 +1,9 @@
 import React from 'react'
 
+/* 
+    Send button for the MessageTextBox.
+*/
+
 const MessageSendButton = (props) => {
 
     return (

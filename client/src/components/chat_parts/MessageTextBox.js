@@ -1,5 +1,10 @@
 import React from 'react'
 
+/* 
+    Message text input. 
+    Undecided whether pressing enter should submit or newline.
+*/
+
 const MessageTextBox = (props) => {
     return (
         <div className="message-text-box">

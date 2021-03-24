@@ -1,6 +1,10 @@
 import React from 'react'
 import Message from './Message'
 
+/* 
+    The chat body where all the messages will show.
+*/
+
 const MessageContainer = (props) => {
     return (
         <div className="message-container">
