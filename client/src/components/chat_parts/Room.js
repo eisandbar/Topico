@@ -1,6 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+/* 
+    Basic Room component.
+    Pressing links to a chatroom with room.id
+*/
+
 const Room = (props) => {
     return (
         <Link to={`chat?cr=${props.room.id}`} >

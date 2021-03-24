@@ -9,7 +9,7 @@ const RoomPage = (props) => {
     const username = props.username || "Tester"
     const [rooms, createRoom] = useRooms()
     
-    useEffect(() => {
+    useEffect(() => {  // Not needed, just testing that createRoom works
         createRoom("Room 5").then(console.log("posted"))
     }, []) 
 
