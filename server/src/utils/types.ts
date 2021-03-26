@@ -1,7 +1,8 @@
 export interface user {
-    username: string
-    email: string
-    password: string
+    id?: number
+    username?: string
+    email?: string
+    password?: string
 }
 
 export interface clientMessage {
@@ -15,7 +16,7 @@ export interface clientMessage {
 export interface connection {
     username: string
     socketId: string
-    room: string
+    roomId: string
 }
 
 export interface serverMessage {
