@@ -1,7 +1,7 @@
 import con from "./myCon"
 import * as types from "../types"
 
-const storeUser = async (socketId, username, room): Promise<types.user> => new Promise((resolve, reject) => {
+const storeUser = async (socketId, username, room): Promise<types.connection> => new Promise((resolve, reject) => {
     con.connect(error => {
         console.log(socketId, username, room)
         const checkUser = 'SELECT id FROM users WHERE username = ? LIMIT 1'

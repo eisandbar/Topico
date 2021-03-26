@@ -1,7 +1,7 @@
 import con from "./myCon"
 import * as types from "../types"
 
-const findUser = (socketId): Promise<types.user>  => new Promise((resolve, reject) =>{
+const findUser = (socketId): Promise<types.connection>  => new Promise((resolve, reject) =>{
     let username = ''
     let room = ''
     con.connect(error => {
