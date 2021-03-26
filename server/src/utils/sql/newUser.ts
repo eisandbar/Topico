@@ -8,7 +8,7 @@ const newUser = async (user: types.user) : Promise<void> => new Promise((resolve
 
         con.query(addUser, [[[username, email, password]]], (err, res) => {
             if (err) return reject(err)
-            return resolve(res)
+            return resolve()
         })
     })
 

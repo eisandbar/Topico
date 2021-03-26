@@ -6,7 +6,7 @@ const newRoom = async (roomname) : Promise<void> => new Promise((resolve, reject
         const addRoom = "INSERT INTO rooms (roomname) VALUES ?"
         con.query(addRoom, [[[roomname]]], (err, res) => {
             if(err) return reject(err)
-            return resolve(res)
+            return resolve()
         })
     })
 })

@@ -1,9 +1,9 @@
-import con from "./myCon"
-import * as types from "../types"
+import con from "../myCon"
+import * as types from "../../types"
 
-const storeUser = async (socketId, username, room): Promise<types.connection> => new Promise((resolve, reject) => {
+const storeUser = async (connection: types.connection): Promise<types.connection> => new Promise((resolve, reject) => {
     con.connect(error => {
-        console.log(socketId, username, room)
+        const {socketId, username, roomId} = connection
         const checkUser = 'SELECT id FROM users WHERE username = ? LIMIT 1'
         const addUser = 'INSERT INTO users (username) VALUES ?'
         const addSocket = 'INSERT INTO sockets (socketId, userId, room) Values ?'
@@ -13,20 +13,20 @@ const storeUser = async (socketId, username, room): Promise<types.connection> =>
             if (res[0]) {
                 console.log('Existing user ' + username)
                 userId = res[0].id
-                con.query(addSocket, [[[socketId, userId, room]]], (err,res) => {
+                con.query(addSocket, [[[socketId, userId, roomId]]], (err,res) => {
                     if (err) return reject(err)
                     console.log('Socket added', socketId)
-                    return resolve({socketId, username, room})
+                    return resolve({socketId, username, roomId})
                 })
             } else {
                 con.query(addUser, [[[username]]], (err, res) => {
                     if (err) return reject(err)
                     console.log(`New user ${username} added`)
                     userId = res.insertId
-                    con.query(addSocket, [[[socketId, userId, room]]], (err,res) => {
+                    con.query(addSocket, [[[socketId, userId, roomId]]], (err,res) => {
                         if (err) return reject(err)
                         console.log('Socket added', socketId)
-                        return resolve( {socketId, username, room})
+                        return resolve( {socketId, username, roomId})
                     })
                 })
             }
