@@ -22,12 +22,12 @@ io.on('connection', socket => {
     socket.on('join room', ({username, room}) => {             
         storeUser(socket.id, username, room)
             .then((res) => {
-                let user: types.user = res
-                console.log(`joining room ${user.room}`)
+                let connection: types.connection = res
+                console.log(`joining room ${connection.room}`)
 
-                socket.join(user.room)
-                io.to(user.room).emit('chat message',
-                formatMessage('BOT', `${user.username} has joined the chat`))
+                socket.join(connection.room)
+                io.to(connection.room).emit('chat message',
+                formatMessage('BOT', `${connection.username} has joined the chat`))
             })
             .catch(err => {throw err})  
         
@@ -36,10 +36,10 @@ io.on('connection', socket => {
     socket.on('chat message', (msg) => {
         findUser(socket.id)
             .then(res =>{    
-                let user: types.user = res    
-                console.log('message: ' + msg, user.room)
-                console.log(user)
-                io.to(user.room).emit('chat message', formatMessage(user.username, msg))
+                let connection: types.connection = res    
+                console.log('message: ' + msg, connection.room)
+                console.log(connection)
+                io.to(connection.room).emit('chat message', formatMessage(connection.username, msg))
         })
             .catch(err => {throw err})   
     })
