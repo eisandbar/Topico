@@ -25,3 +25,9 @@ export interface serverMessage {
     roomId: number
     messageText: string
 }
+
+export interface room {
+    roomId: number
+    roomname: string
+    icon? : ImageData
+}
