@@ -3,7 +3,7 @@ import * as types from "../../types"
 
 const userLeave = (socketId): Promise<types.connection> => new Promise((resolve, reject) => {
     let username = ''
-    let roomId = ''
+    let roomId = null
     con.connect(error => {
         const selectUser = 'SELECT userId, room FROM sockets WHERE socketId = ? LIMIT 1'
         const userData = 'SELECT username FROM users WHERE id = ? LIMIT 1'

@@ -1,55 +1,30 @@
-const express = require("express")
+import express from "express"
 const router = express.Router()
-// import {ensureAuthenticated} from "../config/auth"
+import passport from 'passport'
+
+import * as types from '../utils/types'
+
+import {ensureAuthenticated} from "../config/ensureAuthenticated"
+import { register } from "../config/register"
+import newRoom from "../utils/sql/newRoom"
+import getRooms from "../utils/sql/getRooms"
 
 //router.get('/register')
 
-router.post('/register', (req, res) => {
-    console.log(req.body)
-    const {name, email, password, password2} = req.body
-    let errors = []
-    console.log(`name: ${name}| email: ${email}| password: ${password}`)
-    if (!name || !email || !password || !password2) {
-        errors.push({msg: 'Please fill in all fields.'})
-    }
-
-    if (password !== password2) {
-        errors.push({msg: 'Passwords do not match'})
-    }
-
-    if (password.length < 8) {
-        errors.push({msg: 'Password must be at least 8 characters long.'})
-    }
-
-    if (errors.length > 0) {
-        res.json(JSON.stringify({
-            errors,
-            name,
-            email,
-            password,
-            password2
-        }))
-        console.log("replied")
-    } else {
-        console.log("redirect attempt")
-        res.json(JSON.stringify({
-            success:true,
-            redirectUrl: '/login'
-        }))
-    }
-})
+router.post('/register', register)
 
 //router.get('/login')
 
-router.post('/login', (req, res) => {
-    const {email, password} = req.body
-    console.log("login post")
-    console.log(req.body)
-    if(email && password) {
-        console.log("replied")
+router.post('/login', passport.authenticate('local'), (req, res) => {
+    const user: types.user = req.user
+    if(user) {
         res.json(JSON.stringify({
-            userId: "User Id",
-            redirectUrl: '/rooms'
+            user: {
+                username: user.username,
+                email: user.email,
+            },
+            redirectUrl: '/rooms',
+            loggedIn: true,
         }))
     }
 })
@@ -58,23 +33,21 @@ router.get('/test', (req, res) => {
     res.json({data: "hello"})
 })
 
-router.get('/rooms', (req, res) => {
-    const newRoom = {
-        id: 4,
-        name: "Room 4",
-        icon: undefined,
-    }
-    res.json({rooms: JSON.stringify([newRoom])})
+router.get('/rooms', async (req, res) => {
+    const rooms: Array<types.room> = await getRooms(10)
+    res.json(JSON.stringify({rooms: rooms}))
 })
 
-router.post('/rooms', (req, res) => {
-    console.log(req.body)
-    const newRoom = {
-        id: 5,
-        name: req.body.name,
+router.post('/rooms', async (req, res) => {
+    const roomId = await newRoom(req.body.roomname)
+    const room: types.room = {
+        roomId,
+        roomname: req.body.name,
         icon: undefined,
     }
-    res.json({rooms:JSON.stringify([newRoom])})
+    res.json(JSON.stringify({rooms: [room]}))
 })
+
+router.get('/authenticate', ensureAuthenticated)
 
 module.exports = router

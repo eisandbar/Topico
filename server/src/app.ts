@@ -1,7 +1,11 @@
-const express = require('express')
+import express from 'express'
 const app = express()
 const http = require('http').Server(app)
 const io = require('socket.io')(http)
+import session from 'express-session'
+import passport from 'passport'
+require('../src/config/passport')(passport)
+
 
 import * as types from "./utils/types"
 import newSocket from "./utils/sql/newSocket"
@@ -14,6 +18,17 @@ import deleteSocket from "./utils/sql/deleteSocket"
 // Body parsing
 //app.use(express.urlencoded({extended: false}))
 app.use(express.json())
+
+// Session
+app.use(session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true,
+}))
+
+// Passport
+app.use(passport.initialize())
+app.use(passport.session())
 
 // Routes
 app.use('/', require('./routes/index'))
@@ -30,8 +45,8 @@ io.on('connection', socket => {
             })
             console.log(`joining room ${connection.roomId}`)
             socket.join(connection.roomId)
-        } catch (e) {
-            console.error(e)
+        } catch (err) {
+            console.error(err)
         }
     })
 
@@ -45,8 +60,8 @@ io.on('connection', socket => {
             })
             const message: types.clientMessage = await findMessage(messageId)
             io.to(connection.roomId).emit('chat message', message)
-        } catch (e) {
-            console.error(e)
+        } catch (err) {
+            console.error(err)
         }
     })
 
