@@ -7,10 +7,11 @@ const findSocket = async (socketId: string) : Promise<types.connection> => new P
         con.query(getSocket, [[[]]], (err, res) => {
             if (err) return reject(err)
             if (res[0]) {
-                return resolve({
-                    username: res[0].username,
+                return resolve({                    
                     socketId: res[0].socketId,
+                    userId: res[0].userId,
                     roomId: res[0].roomId,
+                    username: res[0].username,
                 })
             } else return resolve(null)
             

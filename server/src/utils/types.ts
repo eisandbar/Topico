@@ -14,13 +14,14 @@ export interface clientMessage {
 }
 
 export interface connection {
-    username: string
     socketId: string
-    roomId: string
+    userId?: number
+    roomId: number
+    username: string
 }
 
 export interface serverMessage {
-    userId: string
-    roomId: string
+    userId: number
+    roomId: number
     messageText: string
 }
