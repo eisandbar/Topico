@@ -3,13 +3,13 @@ const app = express()
 const http = require('http').Server(app)
 const io = require('socket.io')(http)
 
-import findUser from "./utils/sql/old/findUser"
-import formatMessage from "./utils/formatMessage"
-import storeUser from "./utils/sql/old/storeUser"
-import userLeave from "./utils/sql/old/userLeave"
 import * as types from "./utils/types"
-
-//app.use(express.static(__dirname + "/public"))
+import newSocket from "./utils/sql/newSocket"
+import findSocket from "./utils/sql/findSocket"
+import newMessage from "./utils/sql/newMessage"
+import findOne from "./utils/sql/findOne"
+import findMessage from "./utils/sql/findMessage"
+import deleteSocket from "./utils/sql/deleteSocket"
 
 // Body parsing
 //app.use(express.urlencoded({extended: false}))
@@ -19,37 +19,41 @@ app.use(express.json())
 app.use('/', require('./routes/index'))
 
 io.on('connection', socket => {
-    socket.on('join room', ({username, roomId}) => {             
-        storeUser({socketId: socket.id, username, roomId})
-            .then((res) => {
-                let connection: types.connection = res
-                console.log(`joining room ${connection.roomId}`)
-
-                socket.join(connection.roomId)
-                io.to(connection.roomId).emit('chat message',
-                formatMessage('BOT', `${connection.username} has joined the chat`))
+    socket.on('join room', async ({ username, roomId }) => {
+        try {
+            const userId: number = (await findOne({ username })).id
+            const connection: types.connection = await newSocket({
+                socketId: socket.id,
+                userId,
+                roomId,
+                username,
             })
-            .catch(err => {throw err})  
-        
+            console.log(`joining room ${connection.roomId}`)
+            socket.join(connection.roomId)
+        } catch (e) {
+            console.error(e)
+        }
     })
 
-    socket.on('chat message', (msg) => {
-        findUser(socket.id)
-            .then(res =>{    
-                let connection: types.connection = res    
-                console.log('message: ' + msg, connection.roomId)
-                console.log(connection)
-                io.to(connection.roomId).emit('chat message', formatMessage(connection.username, msg))
-        })
-            .catch(err => {throw err})   
+    socket.on('chat message', async (messageText) => {
+        try {
+            const connection: types.connection = await findSocket(socket.id)
+            const messageId: number = await newMessage({
+                userId: connection.userId,
+                roomId: connection.roomId,
+                messageText,
+            })
+            const message: types.clientMessage = await findMessage(messageId)
+            io.to(connection.roomId).emit('chat message', message)
+        } catch (e) {
+            console.error(e)
+        }
     })
 
     socket.on('disconnect', () => {
-        userLeave(socket.id)
-        .then(res => {
-            let user = res
-            console.log(`${user.username} disconnected`)
-        })
+        deleteSocket(socket.id)
+            .then(res => console.log(`Socket ${socket.id} disconnected`))
+            .catch(err => { throw err })
     })
 
 })
