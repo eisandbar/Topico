@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import fetch from 'node-fetch'
+import { sendGet } from '../../utils/sendGet'
+import { sendPost } from '../../utils/sendPost'
 
 /* 
     useRooms is a custom hook that returns a rooms array and a createRoom function.
@@ -11,13 +12,9 @@ export const useRooms = () => {
     const [rooms, setRooms] = useState([]) // Declare with emtpy Array<room>
 
     useEffect (() => { // Runs when RoomPage component mounts/updates
-        fetch("http://localhost:3000/getRooms", { // GETs a list of rooms from server
-            method: 'GET', 
-            headers: { 'Content-Type': 'application/json' }
-        })
-        .then(res => res.json())
-        .then(resJson => {
-            const newRooms = JSON.parse(resJson).rooms.map(room => { // Formats the res data into room objects
+        const getRooms = async () => {
+            const res = await sendGet({url: "/getRooms"})
+            const newRooms = res.rooms.map(room => { // Formats the res data into room objects
                 return {
                     id: room.roomId,
                     name: room.roomname,
@@ -25,27 +22,24 @@ export const useRooms = () => {
                 }
             })
             console.log(newRooms)
-            setRooms(rooms => [...rooms, ...newRooms]) // Adds to list of rooms
-        })
+            setRooms(newRooms) // Adds to list of rooms
+        }
+        getRooms()
     }, [])
+
 
     // Function POSTs roomname to the server and gets a new room object as a result
     const createRoom = async (roomname) => { 
-        fetch("http://localhost:3000/newRoom", {
-            method: 'POST',
-            body: JSON.stringify({name: "roomname"}),
-            headers: { 'Content-Type': 'application/json' },
-        })
-        .then(res => res.json())
-        .then(resJson => {
-            JSON.parse(resJson.rooms).forEach(room => { // Formats res data into room objects. forEach since only expecting 1 element
-                const newRoom = {
-                    id: room.id,
-                    name: room.name,
-                    icon: room.icon
-                }
-                setRooms(rooms => [...rooms, newRoom]) // Adds to list of rooms
-            })
+        await sendPost({
+            url: "/newRoom",
+            data: {roomname}
+        }).forEach(room => { // Formats res data into room objects. forEach since only expecting 1 element
+            const newRoom = {
+                id: room.id,
+                name: room.name,
+                icon: room.icon
+            }
+            setRooms(rooms => [...rooms, newRoom])
         })
     }
 

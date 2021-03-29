@@ -1,7 +1,7 @@
 import con from './myCon'
 import * as types from '../types'
 
-const getMessages = (limit: number) : Promise<Array<types.clientMessage>> => new Promise((resolve, reject) => {
+const getMessages = (roomId: number) : Promise<Array<types.clientMessage>> => new Promise((resolve, reject) => {
     con.connect(error => {
         const getMessage = `
         SELECT 
@@ -20,8 +20,10 @@ const getMessages = (limit: number) : Promise<Array<types.clientMessage>> => new
             rooms AS r
         ON
             m.roomId = r.id
-        ORDER BY m.id DESC
-        LIMIT ${limit}
+        WHERE
+            r.id = '${roomId}'
+        ORDER BY m.id
+        LIMIT 15
         `
         con.query(getMessage, (err, res) => {
             if (err) return reject(err)

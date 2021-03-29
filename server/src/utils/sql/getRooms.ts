@@ -6,7 +6,7 @@ const getRooms = async (limit: number = 10) : Promise<Array<types.room>> => new 
         const getRoom = `SELECT id AS roomId, roomname FROM rooms LIMIT ${limit}`
         con.query(getRoom, (err, res) => {
             if(err) return reject(err)
-            return resolve(res.map((entry: types.room) => ({roomId: entry.roomId, roomname:entry.roomname})))
+            return resolve(JSON.parse(JSON.stringify(res)))
         })
     })
 })
