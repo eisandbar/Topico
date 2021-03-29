@@ -1,7 +1,8 @@
 import express from 'express'
 const app = express()
+
 const http = require('http').Server(app)
-const io = require('socket.io')(http)
+const io = require('socket.io')(http, {cors: {origin:'http://localhost:3000'}})
 import session from 'express-session'
 import passport from 'passport'
 import localStrategy from './config/localStrategy'
@@ -12,10 +13,11 @@ import * as types from "./utils/types"
 import newSocket from "./utils/sql/newSocket"
 import findSocket from "./utils/sql/findSocket"
 import newMessage from "./utils/sql/newMessage"
-import findOne from "./utils/sql/findOne"
 import findMessage from "./utils/sql/findMessage"
 import deleteSocket from "./utils/sql/deleteSocket"
 import findUserId from './utils/sql/findUserId'
+
+
 
 // Body parsing
 app.use(express.urlencoded({extended: false}))
@@ -37,7 +39,6 @@ app.use('/', require('./routes/index'))
 
 io.on('connection', (socket: any) => {
     socket.on('join room', async ({ username, roomId }: {username:string, roomId:number}) => {
-        console.log("joining room", username, roomId)
         try {
             const userId: number = await findUserId(username)
             const connection: types.connection = await newSocket({
@@ -46,14 +47,14 @@ io.on('connection', (socket: any) => {
                 roomId,
                 username,
             })
-            console.log(`joining room ${connection.roomId}`)
-            socket.join(connection.roomId)
+            console.log(`Socket ${connection.socketId} joining room ${connection.roomId}`)
+            socket.join(`${connection.roomId}`)
         } catch (err) {
             console.error(err)
         }
     })
 
-    socket.on('chat message', async (messageText:string) => {
+    socket.on('chat message', async (messageText:string) => {        
         try {
             const connection: types.connection = await findSocket(socket.id)
             const messageId: number = await newMessage({
@@ -62,7 +63,7 @@ io.on('connection', (socket: any) => {
                 messageText,
             })
             const message: types.clientMessage = await findMessage(messageId)
-            io.to(connection.roomId).emit('chat message', message)
+            io.to(`${connection.roomId}`).emit('chat message', message)
         } catch (err) {
             console.error(err)
         }
