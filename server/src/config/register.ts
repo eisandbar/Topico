@@ -4,9 +4,10 @@ import * as types from '../utils/types'
 import findOne from '../utils/sql/findOne'
 import newUser from '../utils/sql/newUser'
 
-export const register = async (req, res) => {
+export const register = async (req: any, res: any) => {
+    console.log("posted to register")
     const {username, email, password, password2} = req.body
-    let errors = []
+    let errors: Array<object> = []
     if (!username || !email || !password || !password2) {
         errors.push({msg: 'Please fill in all fields.'})
     }
@@ -29,9 +30,11 @@ export const register = async (req, res) => {
         }))
     } else {
         try {
-            const exists: types.user = await findOne({email})
-            if (exists) {
-                errors.push({msg: 'User email already exists'})
+            const emailExists: types.user | undefined = await findOne({email})
+            const usernameExists: types.user | undefined = await findOne({username})
+            if (emailExists || usernameExists) {
+                if (emailExists) errors.push({msg: 'User email already exists'})
+                if (usernameExists) errors.push({msg: 'Username already exists'})
                 res.json(JSON.stringify({
                     errors,
                     username,
@@ -51,7 +54,9 @@ export const register = async (req, res) => {
                         user.password = hash
                         newUser(user)
                             .then(success => {
+                                console.log("Registered user: ", user)
                                 res.json(JSON.stringify({
+                                    errors,
                                     success: success,
                                     redirectUrl: '/login'
                                 }))
