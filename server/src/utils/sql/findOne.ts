@@ -1,7 +1,7 @@
 import con from "./myCon"
 import * as types from "../types"
 
-const findOne = async (user: types.user) : Promise<types.user> => new Promise((resolve, reject) => {
+const findOne = async (user: types.user) : Promise<types.user | undefined> => new Promise((resolve, reject) => {
     con.connect(error => {
         let key = ""
         let value = ""
@@ -15,10 +15,10 @@ const findOne = async (user: types.user) : Promise<types.user> => new Promise((r
             key = "id"
             value = `${user.id}`
         }else {
-            return resolve(null)
+            return resolve(undefined)
         }
 
-        const findUser = `SELECT * FROM users WHERE ${key} = ${value} LIMIT 1`
+        const findUser = `SELECT * FROM users WHERE ${key} = '${value}' LIMIT 1`
         con.query(findUser, (err, res) => {
             if (err) return reject(err)
             if (res[0]) {
@@ -28,7 +28,7 @@ const findOne = async (user: types.user) : Promise<types.user> => new Promise((r
                     password: res[0].password,
                     email: res[0].email,
                 })
-            } else return resolve(null)
+            } else return resolve(undefined)
             
         })
 

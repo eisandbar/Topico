@@ -3,10 +3,10 @@ import * as types from '../types'
 
 const getRooms = async (limit: number = 10) : Promise<Array<types.room>> => new Promise((resolve, reject) => {
     con.connect( error => {
-        const getRoom = `SELECT id AS roomId, roomname FROM rooms LIMIT = ${limit}`
+        const getRoom = `SELECT id AS roomId, roomname FROM rooms LIMIT ${limit}`
         con.query(getRoom, (err, res) => {
             if(err) return reject(err)
-            return resolve(res)
+            return resolve(res.map((entry: types.room) => ({roomId: entry.roomId, roomname:entry.roomname})))
         })
     })
 })
