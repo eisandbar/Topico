@@ -11,7 +11,7 @@ import useFormInput from '../hooks/useFormInput'
 */
 
 const RegisterForm = (props) => {
-    const name = useFormInput("as")
+    const username = useFormInput("as")
     const email = useFormInput("asas@a")
     const password = useFormInput("12345678")
     const password2 = useFormInput("12345678")
@@ -21,14 +21,14 @@ const RegisterForm = (props) => {
         e.preventDefault() // Otherwise the history.push redirect doesn't work
         const formInput = { // Data to POST
             data: {
-                name: name.value,
+                username: username.value,
                 email: email.value,
                 password: password.value,
                 password2: password2.value,
             },
             url: "/register",
         }
-
+        props.setErrors()
         const res = await sendPost(formInput) // POSTing to server
         console.log(res)
         props.setErrors([...res.errors].map(error => error.msg)) // sends to parent all the errors
@@ -42,7 +42,7 @@ const RegisterForm = (props) => {
             <div className="form-input">
                 <label> 
                     Name
-                    <input type="name" {...name} placeholder="Enter Name" />
+                    <input type="name" {...username} placeholder="Enter Name" />
                 </label>
             </div>
             <div className="form-input">
