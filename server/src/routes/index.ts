@@ -7,6 +7,7 @@ import {ensureAuthenticated} from "../config/ensureAuthenticated"
 import { register } from "../config/register"
 import newRoom from "../utils/sql/newRoom"
 import getRooms from "../utils/sql/getRooms"
+import getMessages from "../utils/sql/getMessages"
 
 //router.get('/register')
 
@@ -44,18 +45,22 @@ router.get('/test', (req, res) => {
     res.json({data: "hello"})
 })
 
+router.post('/getMessages', async (req,res) => {
+    const messages: Array<types.clientMessage> = await getMessages(req.body.roomId)
+    console.log(messages, `'${req.body.roomId}'`)
+    res.json(JSON.stringify({messages}))
+})
+
 router.get('/getRooms', async (req, res) => {
-    console.log("getting rooms")
     const rooms: Array<types.room> = await getRooms(10)
-    console.log(rooms)
-    res.json(JSON.stringify({rooms: rooms}))
+    res.json(JSON.stringify({rooms}))
 })
 
 router.post('/newRoom', async (req, res) => {
     const roomId = await newRoom(req.body.roomname)
     const room: types.room = {
         roomId,
-        roomname: req.body.name,
+        roomname: req.body.roomname,
         icon: undefined,
     }
     res.json(JSON.stringify({rooms: [room]}))
