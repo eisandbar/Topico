@@ -15,29 +15,32 @@ import RoomPage from './components/pages/RoomPage';
 // Authorization components
 import { PrivateRoute } from './components/auth/PrivateRoute';
 import { ProvideAuth } from './components/auth/ProvideAuth';
+import { ProvideUser } from './components/user/ProvideUser';
 
 const Routing = ()  => {
     return (
         <ProvideAuth>
-            <Router>
-                <Switch>
-                    <Route path="/login">
-                        <LoginPage />
-                    </Route>
-                    <Route path="/register">
-                        <RegisterPage />
-                    </Route>
-                    <PrivateRoute path="/chat">
-                        <ChatPage />
-                    </PrivateRoute>
-                    <PrivateRoute path="/rooms">
-                        <RoomPage />
-                    </PrivateRoute>
-                    <Route path="/" exact >
-                        <WelcomePage />
-                    </Route>
-                </Switch>
-            </Router>
+            <ProvideUser>
+                <Router>
+                    <Switch>
+                        <Route path="/login">
+                            <LoginPage />
+                        </Route>
+                        <Route path="/register">
+                            <RegisterPage />
+                        </Route>
+                        <PrivateRoute path="/chat">
+                            <ChatPage />
+                        </PrivateRoute>
+                        <PrivateRoute path="/rooms">
+                            <RoomPage />
+                        </PrivateRoute>
+                        <Route path="/" exact >
+                            <WelcomePage />
+                        </Route>
+                    </Switch>
+                </Router>
+            </ProvideUser>
         </ProvideAuth>
     )
 }
