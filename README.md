@@ -16,12 +16,14 @@ General Idea:
     - sql or mongo DB
     
 Next Steps:
-  - Auth on server: 
-    - sessions
-    - encryption
-    - passport
-  - Proper SQL functions, move to new DB
-  - Proper route handling
+  - Session store (redis/mongo/SQL)
+  - Styling
+  - Comments for new code
+  - New functionalities:
+    - Create rooms/ join rooms (Public room page?)
+    - Room invites? Notifications? 
+  - Images
+  - Deploying to a VPS
 
 Progress:
   - Pages for register and login
@@ -31,3 +33,9 @@ Progress:
   - Posting formInputs to server
   - Auth on client (context, redirects, login functions)
   - Commented all code above ^
+  - Proper SQL functions, move to new D
+  - Proper route handling
+  - Auth on server: 
+    - sessions
+    - encryption
+    - passport
