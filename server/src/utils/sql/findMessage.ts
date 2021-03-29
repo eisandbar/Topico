@@ -26,7 +26,7 @@ const findMessage = (messageId: number) : Promise<types.clientMessage> => new Pr
         `
         con.query(getMessage, [[[messageId]]], (err, res) => {
             if (err) return reject(err)
-            return resolve(res[0])
+            return resolve(JSON.parse(JSON.stringify(res[0])))
         })
     })
 })
