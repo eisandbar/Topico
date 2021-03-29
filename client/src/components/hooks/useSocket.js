@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef} from 'react'
 import {io} from 'socket.io-client'
 
-import testMessages from '../../testData/testMessages'
+import { useMessages } from './useMessages'
 
 /* 
     useSocket is a custom hook that manages the websocket when connecting to chat.
@@ -12,7 +12,7 @@ import testMessages from '../../testData/testMessages'
 */
 
 export const useSocket = ({username, roomId}) => {
-    const [messages, setMessages] = useState(testMessages)
+    const [messages, setMessages] = useMessages(roomId)
     const socketRef = useRef()
 
     useEffect(() => {
@@ -24,16 +24,11 @@ export const useSocket = ({username, roomId}) => {
 
         // On incoming messages
         socketRef.current.on("chat message", message => {
-            const newMessage = {
-                text: message.msg,
-                time: message.time,
-                id: message.id
-            }
-            setMessages(messages => [...messages, newMessage])
+            setMessages(messages => [...messages, message])
         })
 
         return () => socketRef.current.disconnect() // Disconnects on dismount
-    }, [username, roomId])
+    }, [username, roomId, setMessages])
 
     const sendMessage = (message) => { // Emits to server the new message
         socketRef.current.emit("chat message", message)
