@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Redirect, Route } from 'react-router'
 import { useAuth } from './ProvideAuth'
 
@@ -10,12 +10,17 @@ import { useAuth } from './ProvideAuth'
 
 export const PrivateRoute = ({children, ...rest}) => {
     const auth = useAuth() // Uses the auth context provided by the parent ProvideAuth component
+
+    useEffect(() => {
+        auth.checkAuth()
+    })
+
     return (
         <Route 
             {...rest} // Gives the other parameters in the prop
             render={({location}) => {
-                console.log(auth.user)
-                return auth.user ? ( // If the user != null
+                console.log(auth.loggedIn)
+                return auth.loggedIn ? ( // If logged in
                     children // Render the childer
                 ) : (
                     <Redirect // Otherwise redirects to pathname
