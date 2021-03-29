@@ -17,10 +17,8 @@ router.post('/register', register)
 
 router.post('/login', (req, res, next) => {
     passport.authenticate('local', (err: any, user: types.user, info: any) => {
-    console.log("Posted to login")
     if (err) throw err
     if (!user) {
-        console.log(req.body)
         res.json(JSON.stringify({
             loggedIn: false,
         }))
@@ -47,7 +45,6 @@ router.get('/test', (req, res) => {
 
 router.post('/getMessages', async (req,res) => {
     const messages: Array<types.clientMessage> = await getMessages(req.body.roomId)
-    console.log(messages, `'${req.body.roomId}'`)
     res.json(JSON.stringify({messages}))
 })
 

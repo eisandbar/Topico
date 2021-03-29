@@ -19,7 +19,6 @@ export const PrivateRoute = ({children, ...rest}) => {
         <Route 
             {...rest} // Gives the other parameters in the prop
             render={({location}) => {
-                console.log(auth.loggedIn)
                 return auth.loggedIn ? ( // If logged in
                     children // Render the childer
                 ) : (

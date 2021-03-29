@@ -12,7 +12,6 @@ export const sendGet = async ({url}) => new Promise((resolve, reject) => {
     })
     .then(res => res.json())
     .then(resJson => {
-    console.log(JSON.parse(resJson))
     return resolve(JSON.parse(resJson))
     })
 })

@@ -30,7 +30,6 @@ const RegisterForm = (props) => {
         }
         props.setErrors()
         const res = await sendPost(formInput) // POSTing to server
-        console.log(res)
         props.setErrors([...res.errors].map(error => error.msg)) // sends to parent all the errors
         if (res.success) { // If registering was successful
             history.push(res.redirectUrl) // Redirects to /login

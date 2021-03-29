@@ -27,7 +27,6 @@ const LoginForm = (props) => {
             password: password.value,
         }
         const res = await auth.signin(data)
-        console.log(res, auth.loggedIn)
         if (res.loggedIn) {// If login was successful
             user.setUser(res.user)
             history.push(res.redirectUrl) // Redirect to destination.
