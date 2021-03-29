@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react'
 import fetch from 'node-fetch'
 
-import testRooms from '../../testData/testRooms'
-
 /* 
     useRooms is a custom hook that returns a rooms array and a createRoom function.
     On mounting and updating it GETs a list of rooms from the server.
@@ -10,26 +8,30 @@ import testRooms from '../../testData/testRooms'
 */
 
 export const useRooms = () => {
-    const [rooms, setRooms] = useState(testRooms) // Declare with emtpy Array<room>
+    const [rooms, setRooms] = useState([]) // Declare with emtpy Array<room>
 
     useEffect (() => { // Runs when RoomPage component mounts/updates
-        fetch("http://localhost:3000/rooms", {method: 'GET'}) // GETs a list of rooms from server
+        fetch("http://localhost:3000/getRooms", { // GETs a list of rooms from server
+            method: 'GET', 
+            headers: { 'Content-Type': 'application/json' }
+        })
         .then(res => res.json())
         .then(resJson => {
-            const newRooms = JSON.parse(resJson.rooms).map(room => { // Formats the res data into room objects
+            const newRooms = JSON.parse(resJson).rooms.map(room => { // Formats the res data into room objects
                 return {
-                    id: room.id,
-                    name: room.name,
+                    id: room.roomId,
+                    name: room.roomname,
                     icon: room.icon
                 }
             })
+            console.log(newRooms)
             setRooms(rooms => [...rooms, ...newRooms]) // Adds to list of rooms
         })
     }, [])
 
     // Function POSTs roomname to the server and gets a new room object as a result
     const createRoom = async (roomname) => { 
-        fetch("http://localhost:3000/rooms", {
+        fetch("http://localhost:3000/newRoom", {
             method: 'POST',
             body: JSON.stringify({name: "roomname"}),
             headers: { 'Content-Type': 'application/json' },
