@@ -6,7 +6,7 @@ const deleteSocket = async (socketId: string) : Promise<void> => new Promise((re
         const delSocket = "DELETE FROM sockets WHERE socketId = ?"
         con.query(delSocket, [[[socketId]]], (err, res) => {
             if (err) return reject(err)
-            return resolve(null)
+            return resolve()
         })
     })
 })

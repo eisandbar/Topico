@@ -1,4 +1,4 @@
-export const ensureAuthenticated = (req, res, next) => {
+export const ensureAuthenticated = (req: any, res: any, next: any) => {
         if(req.isAuthenticated){
             res.json(JSON.stringify({loggedIn : true}))
         } else {

@@ -4,7 +4,8 @@ const http = require('http').Server(app)
 const io = require('socket.io')(http)
 import session from 'express-session'
 import passport from 'passport'
-require('../src/config/passport')(passport)
+import localStrategy from './config/localStrategy'
+localStrategy(passport)
 
 
 import * as types from "./utils/types"
@@ -14,9 +15,10 @@ import newMessage from "./utils/sql/newMessage"
 import findOne from "./utils/sql/findOne"
 import findMessage from "./utils/sql/findMessage"
 import deleteSocket from "./utils/sql/deleteSocket"
+import findUserId from './utils/sql/findUserId'
 
 // Body parsing
-//app.use(express.urlencoded({extended: false}))
+app.use(express.urlencoded({extended: false}))
 app.use(express.json())
 
 // Session
@@ -33,10 +35,11 @@ app.use(passport.session())
 // Routes
 app.use('/', require('./routes/index'))
 
-io.on('connection', socket => {
-    socket.on('join room', async ({ username, roomId }) => {
+io.on('connection', (socket: any) => {
+    socket.on('join room', async ({ username, roomId }: {username:string, roomId:number}) => {
+        console.log("joining room", username, roomId)
         try {
-            const userId: number = (await findOne({ username })).id
+            const userId: number = await findUserId(username)
             const connection: types.connection = await newSocket({
                 socketId: socket.id,
                 userId,
@@ -50,11 +53,11 @@ io.on('connection', socket => {
         }
     })
 
-    socket.on('chat message', async (messageText) => {
+    socket.on('chat message', async (messageText:string) => {
         try {
             const connection: types.connection = await findSocket(socket.id)
             const messageId: number = await newMessage({
-                userId: connection.userId,
+                userId: connection.userId!,
                 roomId: connection.roomId,
                 messageText,
             })
