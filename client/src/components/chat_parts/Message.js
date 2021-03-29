@@ -11,7 +11,7 @@ const Message = (props) => {
             <Avatar/>
             <div className="text-wrapper">
                 <div className="text">
-                    {props.message.text}
+                    {`${props.message.username}: ${props.message.messageText}`}
                 </div>
             </div>
         </li>
