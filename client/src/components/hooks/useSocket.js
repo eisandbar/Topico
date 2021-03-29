@@ -11,7 +11,7 @@ import testMessages from '../../testData/testMessages'
     On dismounting it terminates the connection.
 */
 
-export const useSocket = ({username, room}) => {
+export const useSocket = ({username, roomId}) => {
     const [messages, setMessages] = useState(testMessages)
     const socketRef = useRef()
 
@@ -20,7 +20,7 @@ export const useSocket = ({username, room}) => {
         socketRef.current = io()
 
         // Sends data to join the room
-        socketRef.current.emit("join room", {username, room})
+        socketRef.current.emit("join room", {username, roomId})
 
         // On incoming messages
         socketRef.current.on("chat message", message => {
@@ -33,7 +33,7 @@ export const useSocket = ({username, room}) => {
         })
 
         return () => socketRef.current.disconnect() // Disconnects on dismount
-    }, [username, room])
+    }, [username, roomId])
 
     const sendMessage = (message) => { // Emits to server the new message
         socketRef.current.emit("chat message", message)
