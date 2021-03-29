@@ -4,6 +4,7 @@ import RoomContainer from "../chat_parts/RoomContainer"
 import Profile from "../chat_parts/Profile"
 import { useRooms } from "../hooks/useRooms"
 import { useAuth } from "../auth/ProvideAuth"
+import { useUser } from "../user/ProvideUser"
 
 /* 
     Room page component.
@@ -12,14 +13,14 @@ import { useAuth } from "../auth/ProvideAuth"
 */
 
 const RoomPage = (props) => {
-    const username = props.username || "Tester"
     const [rooms,  ] = useRooms()
     const auth = useAuth()
+    const {user} = useUser()
     
     return (
         <div className="full-height">
             <div className="nav-column">
-                <Profile username={username} />
+                <Profile username={user.username} />
                 <button onClick={auth.signout} > Logout </button>
             </div>
             <div className="content-column">
