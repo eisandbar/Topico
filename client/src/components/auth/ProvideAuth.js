@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 
 import {sendPost} from '../../utils/sendPost'
+import {sendGet} from '../../utils/sendGet'
 
 /* 
     ProvideAuth is a component that provides authentication to its children.
@@ -28,7 +29,7 @@ export const useAuth = () => { // Custom hook to use authContext
 }
 
 const useProvideAuth = () => { // Custom hook to create the user state and signin/signout functions
-    const [user, setUser] = useState(null) // Set to null so that users aren't automatically logged in
+    const [loggedIn, setLoggedIn] = useState(null) // Set to null so that users aren't automatically logged in
 
     const signin = async (data) => { // This function should post data to the server to authenticate
         const loginInput = {
@@ -37,17 +38,33 @@ const useProvideAuth = () => { // Custom hook to create the user state and signi
         }
 
         const res = await sendPost(loginInput)
-        if (res.userId) setUser(res.userId)
+        setLoggedIn(res.loggedIn)
         return res
     }
 
     const signout = async () => { // This function should post to the server to terminate session
-        return setUser(null)
+        const logoutInput = {
+            url: "/logout"
+        }
+        const res = await sendGet(logoutInput)
+        setLoggedIn(res.loggedIn)
+        return res
+    }
+
+    const checkAuth = async () => { // Checks whether authenticated
+        const authInput = {
+            url: "/authenticate"
+        }
+        const res = await sendGet(authInput)
+        setLoggedIn(res.loggedIn)
+        return res
+
     }
 
     return { // Returns an object with the user data, as well as the signin/signout functions
-        user,
+        loggedIn,
         signin,
         signout,
+        checkAuth,
     }
 }

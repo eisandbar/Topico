@@ -7,6 +7,7 @@ import MessageTextBoxContainer from '../chat_parts/MessageTextBoxContainer'
 import Profile from '../chat_parts/Profile'
 import { useSocket } from '../hooks/useSocket'
 import { useAuth } from '../auth/ProvideAuth'
+import { useUser } from '../user/ProvideUser'
 
 /* 
     The ChatPage component.
@@ -18,15 +19,15 @@ import { useAuth } from '../auth/ProvideAuth'
 */
 
 const ChatPage = (props) => {
-    let query = new URLSearchParams(useLocation().search) // Find what room component is in
-    const username = props.username || "Tester" // Username will probably be taken from auth context
-    const [messages, sendMessage] = useSocket({username: username, room: query.get("cr")}) // Connect to the room
     const auth = useAuth()
+    const {user} = useUser()
+    let query = new URLSearchParams(useLocation().search) // Find what room component is in
+    const [messages, sendMessage] = useSocket({username: user.username, roomId: query.get("cr")}) // Connect to the room
 
     return (
         <div className="full-height">
             <div className="nav-column">
-                <Profile username={username}/>
+                <Profile username={user.username}/>
                 <Link to="/rooms"> Back </Link>
                 <button onClick={auth.signout} > Logout </button>
             </div>

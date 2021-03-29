@@ -3,6 +3,7 @@ import { useHistory} from 'react-router-dom'
 
 import { useAuth } from '../auth/ProvideAuth'
 import useFormInput from '../hooks/useFormInput'
+import { useUser } from '../user/ProvideUser'
 
 /* 
     Login form component.
@@ -13,10 +14,11 @@ import useFormInput from '../hooks/useFormInput'
 */
 
 const LoginForm = (props) => {
-    const email = useFormInput("")
-    const password = useFormInput("")
+    const email = useFormInput("Tester@mail")
+    const password = useFormInput("12345678")
     const history = useHistory()
     const auth = useAuth()
+    const user = useUser()
 
     const handleSubmit = async (e) => {
         e.preventDefault() // Otherwise the history.push doesn't redirect
@@ -25,10 +27,11 @@ const LoginForm = (props) => {
             password: password.value,
         }
         const res = await auth.signin(data)
-        console.log(res)
-        res.userId ? ( // If login was successful
+        console.log(res, auth.loggedIn)
+        if (res.loggedIn) {// If login was successful
+            user.setUser(res.user)
             history.push(res.redirectUrl) // Redirect to destination.
-         ) : props.setErrors(res.errors)
+        } else props.setErrors(res.errors)
     }
 
     return (

@@ -4,7 +4,7 @@ const myCon = mysql.createConnection({
     host: 'localhost',
     user: 'AE2',
     password: '12345679',
-    database: 'chatapp'
+    database: 'topico'
 });
 
 export default myCon
