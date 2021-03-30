@@ -16,7 +16,6 @@ General Idea:
     - sql or mongo DB
     
 Next Steps:
-  - Session store (redis/mongo/SQL)
   - Styling
   - Comments for new code
   - New functionalities:
@@ -39,3 +38,4 @@ Progress:
     - sessions
     - encryption
     - passport
+  - Session store with mongodb
