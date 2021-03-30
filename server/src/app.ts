@@ -6,6 +6,7 @@ const io = require('socket.io')(http, {cors: {origin:'http://localhost:3000'}})
 import session from 'express-session'
 import passport from 'passport'
 import localStrategy from './config/localStrategy'
+import MongoStore from 'connect-mongo'
 localStrategy(passport)
 
 
@@ -25,7 +26,8 @@ app.use(express.json())
 
 // Session
 app.use(session({
-    secret: 'secret',
+    store: MongoStore.create({ mongoUrl: 'mongodb://localhost/topico' }),
+    secret: 'P0l4r8e4R',
     resave: true,
     saveUninitialized: true,
 }))
