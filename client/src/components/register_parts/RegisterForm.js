@@ -28,7 +28,7 @@ const RegisterForm = (props) => {
             },
             url: "/register",
         }
-        props.setErrors()
+        props.setErrors([])
         const res = await sendPost(formInput) // POSTing to server
         props.setErrors([...res.errors].map(error => error.msg)) // sends to parent all the errors
         if (res.success) { // If registering was successful
@@ -37,34 +37,40 @@ const RegisterForm = (props) => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div className="form-input">
-                <label> 
-                    Name
-                    <input type="name" {...username} placeholder="Enter Name" />
-                </label>
+        <form onSubmit={handleSubmit} className="box">
+
+            <div className="field">
+                <label className="label is-size-3"> Name </label>
+                <div className="control">
+                <input type="name" {...username} placeholder="Enter Name" className="input is-size-5 is-rounded is-primary"/>
+                </div>
             </div>
-            <div className="form-input">
-                <label>
-                    Email
-                    <input type="email" {...email} placeholder="Enter Email" />
-                </label>
+
+            <div className="field">
+                <label className="label is-size-3"> Email </label>
+                <div className="control">
+                <input type="email" {...email} placeholder="Enter Email" className="input is-size-5 is-rounded is-primary" />
+                </div>
             </div>
-            <div className="form-input">
-                <label>
-                    Password
-                    <input type="password" {...password} placeholder="Enter Password" />
-                </label>
+
+            <div className="field">
+                <label className="label is-size-3"> Password </label>
+                <div className="control">
+                <input type="password" {...password} placeholder="Enter Password" className="input is-size-5 is-rounded is-primary" />
+                </div>
             </div>
+
             <div className="form-input">
-                <label>
-                    Confirm Password
-                    <input type="password" {...password2} placeholder="Confirm Password" />
-                </label>
+                <label className="label is-size-3"> Confirm Password </label>
+                <div className="control">
+                <input type="password" {...password2} placeholder="Confirm Password" className="input is-size-5 is-rounded is-primary" />
+                </div>
             </div>
-            <button type="submit" className="btn btn-primary btn-block">
-                Register
-            </button>
+
+            <div className="control py-3">
+                <button type="submit" className="button p-3 is-primary"> Register </button>
+            </div>
+
         </form>
     )
 }
