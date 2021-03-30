@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 // Styling
-import './index.css'
+//import './index.css'
+import './sass/general.scss'
+
 
 // Page Components
 import RegisterPage from './components/pages/RegisterPage'
