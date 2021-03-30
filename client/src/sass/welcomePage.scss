@@ -1,0 +1,15 @@
+@import './general.scss';
+ 
+@import '../../node_modules/bulma/sass/elements/title.sass';
+@import '../../node_modules/bulma/sass/layout/hero.sass';
+@import '../../node_modules/bulma/sass/layout/section.sass';
+
+.top-row{ 
+    background-color: $light-purple;
+    height: 25%;
+}
+
+.bottom-row{ 
+    background-color: $light-orange;
+    height: 25%;
+}

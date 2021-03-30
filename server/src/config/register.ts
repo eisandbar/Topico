@@ -5,7 +5,6 @@ import findOne from '../utils/sql/findOne'
 import newUser from '../utils/sql/newUser'
 
 export const register = async (req: any, res: any) => {
-    console.log("posted to register")
     const {username, email, password, password2} = req.body
     let errors: Array<object> = []
     if (!username || !email || !password || !password2) {
@@ -54,7 +53,6 @@ export const register = async (req: any, res: any) => {
                         user.password = hash
                         newUser(user)
                             .then(success => {
-                                console.log("Registered user: ", user)
                                 res.json(JSON.stringify({
                                     errors,
                                     success: success,

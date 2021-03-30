@@ -21,7 +21,6 @@ export const useRooms = () => {
                     icon: room.icon
                 }
             })
-            console.log(newRooms)
             setRooms(newRooms) // Adds to list of rooms
         }
         getRooms()

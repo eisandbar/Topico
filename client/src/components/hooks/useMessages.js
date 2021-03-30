@@ -21,10 +21,9 @@ export const useMessages = (roomId) => {
                     date: message.date
                 }
             })
-            console.log(newMessages)
             setMessages(newMessages) // Adds to list of messages
         }
         getMessages()
-    }, [])
+    }, [roomId])
     return [messages, setMessages]
 }

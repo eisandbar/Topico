@@ -32,7 +32,6 @@ export default (passport: PassportStatic) => {
 
     // Necessary for sessions
     passport.serializeUser((user: types.user, done) => {
-        console.log("Trying to serialize", user)
         done(null, user.id)
     })
     passport.deserializeUser(async (id: any, done) => {
