@@ -4,10 +4,12 @@ $dark-orange: #f58024;
 $light-orange: #fbb149;
 $dark-green: #589c48;
 $light-green: #7bb662;
-$primary: $light-green;
 
-@import '../../node_modules/bulma/sass/utilities/_all.sass';
-@import '../../node_modules/bulma/sass/base/_all.sass';
+$primary: $light-green;
+$link: #fff;
+$title-color: #fff;
+
+@import '../../node_modules/bulma/bulma.sass';
 
 body, html{
     height: 100%;
@@ -15,4 +17,24 @@ body, html{
 
 .fullheight {
     height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.top-row{ 
+    background-color: $light-purple;
+    height: 20%;
+    padding: 20px;
+}
+
+.bottom-row{ 
+    background-color: $light-orange;
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.middle-row{
+    background-color: $primary;
+    height: auto;
+    padding: 20px;
 }
