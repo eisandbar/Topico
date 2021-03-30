@@ -1,5 +1,7 @@
 import React from 'react'
-import { useHistory} from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
+
+import '../../sass/loginPage.scss'
 
 import { useAuth } from '../auth/ProvideAuth'
 import useFormInput from '../hooks/useFormInput'
@@ -34,20 +36,24 @@ const LoginForm = (props) => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div className="form-input">
-                <label>
-                    Email
-                    <input type="email" {...email} placeholder="Enter Email" />
-                </label>
+        <form onSubmit={handleSubmit} className="box">
+            <div className="field">
+                <label className="label is-size-3"> Email </label>
+                <div className="control">
+                    <input type="email" {...email} placeholder="Enter Email" className="input is-size-5 is-rounded is-primary" />
+                </div>
             </div>
-            <div className="form-input">
-                <label> 
-                    Passsword
-                    <input type="password" {...password} placeholder="Enter Password" />
-                </label>
+
+            <div className="field">
+                <label className="label is-size-3"> Passsword </label>
+                <div className="control">
+                    <input type="password" {...password} placeholder="Enter Password" className="input is-size-5 is-rounded is-primary" />
+                </div>
             </div>
-            <button type="submit" className="btn btn-primary btn-block">Login</button>
+
+            <div className="control py-3">
+                <button type="submit" className="button p-3 is-primary"> Login </button>
+            </div>
         </form>
     )
 }
