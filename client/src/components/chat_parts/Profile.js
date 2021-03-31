@@ -9,7 +9,7 @@ const Profile = (props) => {
     return (
         <div className="">
             <Avatar class={"is-96x96"} />
-            <div className="">{props.username}</div>
+            <div className="is-size-3 has-text-weight-semibold has-text-white">{props.username}</div>
         </div>
     )
 }

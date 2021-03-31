@@ -22,27 +22,31 @@ import '../../sass/chatPage.scss'
 
 const ChatPage = (props) => {
     const auth = useAuth()
-    const {user} = useUser()
+    const { user } = useUser()
     let query = new URLSearchParams(useLocation().search) // Find what room component is in
-    const [messages, sendMessage] = useSocket({username: user.username, roomId: query.get("cr")}) // Connect to the room
-
+    const [messages, sendMessage] = useSocket({ username: user.username, roomId: query.get("cr") }) // Connect to the room
+    const location = useLocation()
     return (
-
         <div className="fullheight">
             <NavBar />
 
             <div className="columns fullheight is-gapless is-mobile">
 
-                <div className="column is-3 is-narrow-mobile">
+                <div className="column left-column">
                     <div className="rows fullheight">
 
                         <div className="row profile flex-column">
-                            <Profile username={user.username}/>
-                            <Link to="/rooms"> Back </Link>
-                            <button onClick={auth.signout} > Logout </button>
+                            <Profile username={user.username} />
+                            <div className="field is-grouped">
+                                <Link to="/rooms" className="button is-fullwidth is-rounded is-outlined is-warning has-background-white"> Back </Link>
+                                <button className="button is-fullwidth is-rounded is-outlined is-warning has-background-white" onClick={auth.signout} > Logout </button>
+                            </div>
                         </div>
 
                         <div className="row side-bar">
+                            <div className="block roomname">
+                                <p className="is-size-3 has-text-weight-semibold">{location.state.roomname}</p>
+                            </div>
                         </div>
 
                     </div>
@@ -51,35 +55,22 @@ const ChatPage = (props) => {
                 <div className="column is-9 main-content">
                     <div className="rows fullheight">
                         <div className="row chat-messages" id="scroll-style">
-                
-                            <MessageContainer messages={messages}/>
-                    
+
+                            <MessageContainer messages={messages} />
+
                         </div>
 
                         <div className="row chat-input">
 
-                            <MessageTextBoxContainer sendMessage={sendMessage} /> 
+                            <MessageTextBoxContainer sendMessage={sendMessage} />
 
                         </div>
                     </div>
-                    
+
                 </div>
 
             </div>
         </div>
-
-       /*  <div className="full-height">
-            <div className="nav-column">
-                <Profile username={user.username}/>
-                <Link to="/rooms"> Back </Link>
-                <button onClick={auth.signout} > Logout </button>
-            </div>
-            <div className="content-column">
-                <MessageContainer messages={messages}/>
-                <MessageTextBoxContainer sendMessage={sendMessage} />
-            </div>
-        </div> */
-
     )
 }
 
