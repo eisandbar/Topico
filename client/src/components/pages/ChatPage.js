@@ -8,7 +8,9 @@ import Profile from '../chat_parts/Profile'
 import { useSocket } from '../hooks/useSocket'
 import { useAuth } from '../auth/ProvideAuth'
 import { useUser } from '../user/ProvideUser'
+import NavBar from '../chat_parts/NavBar'
 
+import '../../sass/chatPage.scss'
 /* 
     The ChatPage component.
 
@@ -25,7 +27,45 @@ const ChatPage = (props) => {
     const [messages, sendMessage] = useSocket({username: user.username, roomId: query.get("cr")}) // Connect to the room
 
     return (
-        <div className="full-height">
+
+        <div className="fullheight">
+            <NavBar />
+
+            <div className="columns fullheight is-gapless is-mobile">
+
+                <div className="column is-3 is-narrow-mobile">
+                    <div className="rows fullheight">
+
+                        <div className="row profile flex-column">
+                            <Profile username={user.username}/>
+                            <Link to="/rooms"> Back </Link>
+                            <button onClick={auth.signout} > Logout </button>
+                        </div>
+
+                        <div className="row side-bar">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div className="column is-9 main-content">
+                    <div className="rows fullheight">
+                        <div className="row chat-messages">
+                
+                        <MessageContainer messages={messages}/>
+                        </div>
+                        <div className="row chat-input">
+
+                        <MessageTextBoxContainer sendMessage={sendMessage} />   
+                        </div>
+                    </div>
+                    
+                </div>
+
+            </div>
+        </div>
+
+       /*  <div className="full-height">
             <div className="nav-column">
                 <Profile username={user.username}/>
                 <Link to="/rooms"> Back </Link>
@@ -35,7 +75,7 @@ const ChatPage = (props) => {
                 <MessageContainer messages={messages}/>
                 <MessageTextBoxContainer sendMessage={sendMessage} />
             </div>
-        </div>
+        </div> */
 
     )
 }

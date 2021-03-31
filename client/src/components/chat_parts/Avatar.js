@@ -1,5 +1,5 @@
 import React from 'react'
-
+import stockUser from '../../testData/stock-user.png'
 /* 
     Avatar component for profile pics in profile and messages
 */
@@ -7,7 +7,9 @@ import React from 'react'
 const Avatar = (props) => {
     return (
         <div className="avatar">  
-            {/* <img src={props.img}/> */}
+            <figure className={"image " + props.class}>
+                <img className="is-rounded" src={stockUser} alt="" />
+            </figure>
         </div>
     )
 }
