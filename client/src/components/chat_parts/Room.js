@@ -8,13 +8,17 @@ import { Link } from 'react-router-dom'
 
 const Room = (props) => {
     return (
-        <Link to={`chat?cr=${props.room.id}`} >
+        <Link to={{
+            pathname:"/chat",
+            search: `?cr=${props.room.id}`,
+            state: {roomname: props.room.roomname}
+        }} >
         <li className="room">
             <div className="room-icon">
 
             </div>
             <div className="room-name">
-                {props.room.name}
+                {props.room.roomname}
             </div>
         </li>
         </Link>
