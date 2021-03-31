@@ -17,7 +17,7 @@ export const useRooms = () => {
             const newRooms = res.rooms.map(room => { // Formats the res data into room objects
                 return {
                     id: room.roomId,
-                    name: room.roomname,
+                    roomname: room.roomname,
                     icon: room.icon
                 }
             })

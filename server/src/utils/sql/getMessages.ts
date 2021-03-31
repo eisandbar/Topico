@@ -22,7 +22,7 @@ const getMessages = (roomId: number) : Promise<Array<types.clientMessage>> => ne
             m.roomId = r.id
         WHERE
             r.id = '${roomId}'
-        ORDER BY m.id
+        ORDER BY m.id DESC
         LIMIT 15
         `
         con.query(getMessage, (err, res) => {

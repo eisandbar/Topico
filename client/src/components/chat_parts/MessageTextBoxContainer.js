@@ -20,9 +20,16 @@ const MessageTextBoxContainer = (props) => {
     }
 
     return (
-        <div>
-            <MessageTextBox value={textInput} handleChange={handleChange} />
-            <MessageSendButton handleSubmit={handleSubmit} />
+        <div className="columns is-mobile is-gapless">
+            <div className="column is-1" />
+            <div className="column">
+                <MessageTextBox value={textInput} handleChange={handleChange}/>
+            </div>
+
+            <div className="column is-2">
+                <MessageSendButton handleSubmit={handleSubmit} />
+            </div>
+        
         </div>
     )
 }

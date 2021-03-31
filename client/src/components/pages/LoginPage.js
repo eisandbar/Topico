@@ -14,11 +14,11 @@ const LoginPage = () => {
     const [errors, setErrors] = useState([])
 
     return (
-        <div className="fullheight">
+        <div className="fullheight flex-column">
 
             <div className="top-row is-flex is-align-items-flex-end" >
                 <div className="container">
-                    <p className="has-text-white is-size-1 "> Login </p>
+                    <p className="has-text-white is-size-1 has-text-weight-semibold"> Login </p>
                 </div>
             </div>
 

@@ -21,7 +21,7 @@ export const useMessages = (roomId) => {
                     date: message.date
                 }
             })
-            setMessages(newMessages) // Adds to list of messages
+            setMessages(newMessages.reverse()) // Adds to list of messages
         }
         getMessages()
     }, [roomId])
