@@ -15,8 +15,8 @@ const RegisterPage = () => {
     const [errors, setErrors] = useState([])
 
     return (
-        <div className="fullheight">
-            <div className="top-row is-flex is-align-items-flex-end">
+        <div className="fullheight flex-column">
+            <div className="top-row is-flex is-align-items-flex-end has-text-weight-semibold">
                 <div className="container">
                     <p className="has-text-white is-size-1 "> Register </p>
                 </div>
@@ -34,7 +34,7 @@ const RegisterPage = () => {
             </div>
 
             <div className="bottom-row">
-                {errors.length != 0 ? (<div className="box container">
+                {errors.length !== 0 ? (<div className="box container">
                     <ErrorBox errors={errors} />
                 </div>) : <div/>}
             </div>

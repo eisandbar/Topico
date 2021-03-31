@@ -12,7 +12,7 @@ import '../../sass/welcomePage.scss'
 
 const WelcomePage = () => {
     return (
-        <div className="fullheight">
+        <div className="fullheight flex-column">
             <div className="top-row" />
             <section className="hero is-halfheight is-primary">
                 <div className="hero-body">
