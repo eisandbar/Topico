@@ -1,0 +1,25 @@
+@import './general.scss';
+
+// .columns {
+//     // display: flex;
+//     // flex-direction: row;
+//     // align-items: stretch;
+// }
+
+.profile {
+    background-color: $light-purple;
+    height: 20%;
+    padding: 20px;
+}
+
+.side-bar {
+    background-color: $light-orange;
+    height: 80%;
+    padding: 20px;
+}
+
+.main-content {
+    background-color: $light-green;
+    height: 100%;
+    padding: 20px;
+}
