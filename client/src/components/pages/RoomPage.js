@@ -7,6 +7,7 @@ import Profile from "../chat_parts/Profile"
 import { useRooms } from "../hooks/useRooms"
 import { useAuth } from "../auth/ProvideAuth"
 import { useUser } from "../user/ProvideUser"
+import NavBar from "../chat_parts/NavBar"
 
 import '../../sass/roomPage.scss'
 
@@ -23,19 +24,19 @@ const RoomPage = (props) => {
     
     return (
         <div className="fullheight">
+            <NavBar />
+
             <div className="columns fullheight is-gapless is-mobile">
 
-                <div className="column is-3 is-narrow-mobile">
+                <div className="column left-column">
                     <div className="rows fullheight">
 
                         <div className="row profile flex-column">
-                            <div className="box" />
                             <Profile username={user.username} />
-                            <button onClick={auth.signout} > Logout </button>
+                            <button className="button is-rounded is-outlined is-warning has-background-white" onClick={auth.signout} > Logout </button>
                         </div>
 
                         <div className="row side-bar">
-                            <div className="box" />
                         </div>
 
                     </div>
@@ -43,20 +44,11 @@ const RoomPage = (props) => {
 
                 <div className="column is-9 main-content">
 
-                    <div className="box" />
                     <RoomContainer rooms={rooms} />
 
                 </div>
 
             </div>
-        
-            {/* <div className="nav-column">
-                <Profile username={user.username} />
-                <button onClick={auth.signout} > Logout </button>
-            </div>
-            <div className="content-column">
-                <RoomContainer rooms={rooms} />
-            </div> */}
         </div>
     )
 }
