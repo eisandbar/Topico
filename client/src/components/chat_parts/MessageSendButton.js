@@ -7,14 +7,10 @@ import React from 'react'
 const MessageSendButton = (props) => {
 
     return (
-        <div 
-            className="message-send-btn"
+        <div className="button ml-2 is-info" 
             onClick={props.handleSubmit}
         >
-            <div className="send-btn-text">
-                Send
-            </div>
-
+            Send
         </div>
     )
 }

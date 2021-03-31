@@ -10,12 +10,15 @@
     background-color: $light-purple;
     height: 20%;
     padding: 20px;
+    min-width: 150px;
+    min-height: 200px;
 }
 
 .side-bar {
     background-color: $light-orange;
     height: 80%;
     padding: 20px;
+    min-width: 150px;
 }
 
 .main-content {

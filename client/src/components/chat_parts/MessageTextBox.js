@@ -7,13 +7,11 @@ import React from 'react'
 
 const MessageTextBox = (props) => {
     return (
-        <div className="message-text-box">
-            <textarea
+        <div >
+            <textarea className="input is-info"
                 value={props.value}
-                type="text-area"
-                placeholder="Comment"
                 onChange={props.handleChange}
-                onKeyPress={props.handleKey}
+                placeholder="Comment"
             />
         </div>
     )

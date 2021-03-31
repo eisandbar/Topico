@@ -50,13 +50,16 @@ const ChatPage = (props) => {
 
                 <div className="column is-9 main-content">
                     <div className="rows fullheight">
-                        <div className="row chat-messages">
+                        <div className="row chat-messages" id="scroll-style">
                 
-                        <MessageContainer messages={messages}/>
+                            <MessageContainer messages={messages}/>
+                    
                         </div>
+
                         <div className="row chat-input">
 
-                        <MessageTextBoxContainer sendMessage={sendMessage} />   
+                            <MessageTextBoxContainer sendMessage={sendMessage} /> 
+
                         </div>
                     </div>
                     
