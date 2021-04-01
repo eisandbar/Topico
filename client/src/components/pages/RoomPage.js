@@ -42,10 +42,13 @@ const RoomPage = (props) => {
                     </div>
                 </div>
 
-                <div className="column is-9 main-content">
+                <div className="column is-7 main-content rooms">
+                    <div className="rooms" id="scrollbar">
+                        <RoomContainer rooms={rooms} />
+                    </div>
+                </div>
 
-                    <RoomContainer rooms={rooms} />
-
+                <div className="column has-background-primary-light">
                 </div>
 
             </div>
