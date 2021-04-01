@@ -16,7 +16,6 @@ General Idea:
     - sql or mongo DB
     
 Next Steps:
-  - Styling
   - Comments for new code
   - New functionalities:
     - Create rooms/ join rooms (Public room page?)
@@ -39,3 +38,4 @@ Progress:
     - encryption
     - passport
   - Session store with mongodb
+  - Styling
