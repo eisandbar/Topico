@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Avatar from './Avatar'
 
 /* 
     Basic Room component.
@@ -8,7 +9,29 @@ import { Link } from 'react-router-dom'
 
 const Room = (props) => {
     return (
-        <Link to={{
+        <Link
+        to={{
+            pathname:"/chat",
+            search: `?cr=${props.room.id}`,
+            state: {roomname: props.room.roomname}
+        }} >
+            <li>
+                <div className="columns is-variable is-2 is-mobile is-vcentered">
+
+                    <div className="column is-narrow">
+                        <Avatar class={"is-64x64"} />
+                    </div>
+
+                    <div className="column">
+                            <span className="button is-fullwidth is-rounded room-description is-size-3 has-text-weight-semibold"> {props.room.roomname} </span>
+                    </div>
+
+                </div>
+            </li>
+        </Link>
+
+        /* <Link
+        to={{
             pathname:"/chat",
             search: `?cr=${props.room.id}`,
             state: {roomname: props.room.roomname}
@@ -21,7 +44,7 @@ const Room = (props) => {
                 {props.room.roomname}
             </div>
         </li>
-        </Link>
+        </Link> */
     )
 }
 

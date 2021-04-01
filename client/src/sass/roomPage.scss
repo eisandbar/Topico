@@ -24,3 +24,13 @@
     height: 100%;
     padding: 20px;
 }
+
+.rooms {
+    height: 100%;
+    padding: 20px;
+	overflow-y: auto;
+}
+
+.room-description{
+    color: $darkest-green;
+}

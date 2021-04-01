@@ -1,7 +1,7 @@
 @import './general.scss';
 
 .chat-messages {
-    height: calc(100% - 4rem);
+    height: 100%;
     padding: 20px;
 	overflow-y: auto;
 }

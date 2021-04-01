@@ -7,7 +7,7 @@ import Message from './Message'
 
 const MessageContainer = (props) => {
     return (
-        <div className="message-container">
+        <div className="">
             <ul>
                 {props.messages.map((message) => <Message key={message.id} message={message}/>)}
             </ul>
