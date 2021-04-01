@@ -8,7 +8,7 @@ import Avatar from './Avatar'
 const Message = (props) => {
     const time = new Date(props.message.date).toLocaleTimeString()
     return (
-        <li className="message-block">
+        <li>
             <div className="columns is-variable is-2 is-mobile">
 
                 <div className="column is-narrow">
@@ -31,12 +31,6 @@ const Message = (props) => {
                 </div>
 
             </div>
-            {/* <Avatar class={"is-48x48"} />
-            <div className="text-wrapper">
-                <div className="text">
-                    {`${props.message.username}: ${props.message.messageText}`}
-                </div>
-            </div> */}
         </li>
     )
 }
