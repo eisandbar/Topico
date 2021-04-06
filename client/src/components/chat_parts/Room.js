@@ -8,6 +8,7 @@ import Avatar from './Avatar'
 */
 
 const Room = (props) => {
+    
     return (
         <Link
         to={{
@@ -19,11 +20,11 @@ const Room = (props) => {
                 <div className="columns is-variable is-2 is-mobile is-vcentered">
 
                     <div className="column is-narrow">
-                        <Avatar class={"is-64x64"} />
+                        <Avatar class={"room-image"} />
                     </div>
 
                     <div className="column">
-                            <span className="button is-fullwidth is-rounded room-description is-size-3 has-text-weight-semibold"> {props.room.roomname} </span>
+                            <span className="button is-fullwidth is-rounded room-description is-size-5 has-text-weight-semibold"> {props.room.roomname} </span>
                     </div>
 
                 </div>

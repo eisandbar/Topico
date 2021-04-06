@@ -1,3 +1,4 @@
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
@@ -18,6 +19,9 @@ import RoomPage from './components/pages/RoomPage';
 import { PrivateRoute } from './components/auth/PrivateRoute';
 import { ProvideAuth } from './components/auth/ProvideAuth';
 import { ProvideUser } from './components/user/ProvideUser';
+
+export const IP = "http://localhost:3000"
+
 
 const Routing = ()  => {
     return (

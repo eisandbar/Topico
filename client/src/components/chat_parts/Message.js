@@ -6,7 +6,7 @@ import Avatar from './Avatar'
 */
 
 const Message = (props) => {
-    const time = new Date(props.message.date).toLocaleTimeString()
+    const time = new Date(props.message.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     return (
         <li>
             <div className="columns is-variable is-2 is-mobile">

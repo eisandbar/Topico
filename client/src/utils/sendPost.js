@@ -1,4 +1,5 @@
 import fetch from "node-fetch"
+import {IP} from '../index'
 
 /* 
     sendPost function POSTs to the server.
@@ -7,7 +8,7 @@ import fetch from "node-fetch"
 */
 
 export const sendPost = async (formInput) => new Promise((resolve, reject) => {
-    fetch("http://localhost:3000" + formInput.url, { // POSTing to server
+    fetch(IP + formInput.url, { // POSTing to server
         method: "POST",
         body: JSON.stringify(formInput.data),
         headers: {"Content-Type": "application/json"},

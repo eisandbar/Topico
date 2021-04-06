@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useLocation } from 'react-router'
 import { Link } from 'react-router-dom'
 
@@ -11,6 +11,7 @@ import { useUser } from '../user/ProvideUser'
 import NavBar from '../chat_parts/NavBar'
 
 import '../../sass/chatPage.scss'
+import '../../sass/roomPage.scss'
 /* 
     The ChatPage component.
 
@@ -26,33 +27,36 @@ const ChatPage = (props) => {
     let query = new URLSearchParams(useLocation().search) // Find what room component is in
     const [messages, sendMessage] = useSocket({ username: user.username, roomId: query.get("cr") }) // Connect to the room
     const location = useLocation()
+    const [display, setDisplay] = useState("is-hidden-mobile")
+    const handleClick = () => {
+        display === "is-hidden-mobile" ? setDisplay("") : setDisplay("is-hidden-mobile")
+    }
+
     return (
         <div className="fullheight">
-            <NavBar />
+            <NavBar handleClick={handleClick}/>
 
             <div className="columns fullheight is-gapless is-mobile">
-
-                <div className="column left-column">
+                <div className={"column left-column " + display}>
                     <div className="rows fullheight">
-
+                        
                         <div className="row profile flex-column">
                             <Profile username={user.username} />
-                            <div className="field is-grouped">
-                                <Link to="/rooms" className="button is-fullwidth is-rounded is-outlined is-warning has-background-white"> Back </Link>
-                                <button className="button is-fullwidth is-rounded is-outlined is-warning has-background-white" onClick={auth.signout} > Logout </button>
-                            </div>
+                            <button className="button is-fullwidth is-rounded is-outlined is-warning has-background-white" onClick={auth.signout} > Logout </button>
+                            
                         </div>
 
                         <div className="row side-bar">
                             <div className="block roomname">
-                                <p className="is-size-3 has-text-weight-semibold">{location.state.roomname}</p>
+                                <p className="is-size-3 has-text-weight-semibold is-size-6-mobile">{location.state.roomname}</p>
                             </div>
+                            <Link to="/rooms" className="button is-fullwidth is-rounded is-outlined is-danger has-background-white"> Back </Link>
                         </div>
 
                     </div>
                 </div>
 
-                <div className="column is-9 main-content">
+                <div className="column main-content">
                     <div className="rows fullheight">
                         <div className="row chat-messages" id="scroll-style">
 
