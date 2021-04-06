@@ -1,8 +1,14 @@
 import React from 'react'
 
-const NavBar = () => {
+const NavBar = (props) => {
     return (
-        <nav class="navbar" role="navigation" aria-label="main navigation">
+        <nav className="navbar" role="navigation" aria-label="main navigation">
+            
+            <button onClick={props.handleClick || null} className="is-hidden-tablet navbar-burger" aria-label="menu" aria-expanded="false">
+                        <span ></span>
+                        <span ></span>
+                        <span ></span>
+            </button>
            {/*  <div class="navbar-brand">
                 <a class="navbar-item" href="https://bulma.io">
                     <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" />
