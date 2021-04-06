@@ -1,12 +1,12 @@
 import fetch from "node-fetch"
-
+import {IP} from '../index'
 /* 
     sendGet function GETs from the server.
     Returns a Promise that resolves to the parsed JSON object.
 */
 
 export const sendGet = async ({url}) => new Promise((resolve, reject) => {
-    fetch("http://localhost:3000" + url, { // GET from server
+    fetch(IP + url, { // GET from server
         method: "GET",
         headers: {"Content-Type": "application/json"},
     })
