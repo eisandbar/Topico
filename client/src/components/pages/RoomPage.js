@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 
 
 
@@ -21,14 +21,18 @@ const RoomPage = (props) => {
     const [rooms,  ] = useRooms()
     const auth = useAuth()
     const {user} = useUser()
+    const [display, setDisplay] = useState("is-hidden-mobile")
+    const handleClick = () => {
+        display === "is-hidden-mobile" ? setDisplay("") : setDisplay("is-hidden-mobile")
+    }
     
     return (
         <div className="fullheight">
-            <NavBar />
+            <NavBar handleClick={handleClick} />
 
             <div className="columns fullheight is-gapless is-mobile">
 
-                <div className="column left-column">
+                <div className={"column left-column " + display}>
                     <div className="rows fullheight">
 
                         <div className="row profile flex-column">
@@ -42,13 +46,13 @@ const RoomPage = (props) => {
                     </div>
                 </div>
 
-                <div className="column is-7 main-content rooms">
+                <div className="column main-content rooms">
                     <div className="rooms" id="scrollbar">
                         <RoomContainer rooms={rooms} />
                     </div>
                 </div>
 
-                <div className="column has-background-primary-light">
+                <div className="column has-background-primary-light is-hidden-mobile is-3">
                 </div>
 
             </div>
