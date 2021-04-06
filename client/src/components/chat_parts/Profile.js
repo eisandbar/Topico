@@ -8,8 +8,8 @@ import Avatar from './Avatar'
 const Profile = (props) => {
     return (
         <div className="">
-            <Avatar class={"is-96x96"} />
-            <div className="is-size-3 has-text-weight-semibold has-text-white">{props.username}</div>
+            <Avatar class={""} />
+            <div className="profile-username has-text-weight-semibold has-text-white">{props.username}</div>
         </div>
     )
 }

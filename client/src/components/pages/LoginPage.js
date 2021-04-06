@@ -22,7 +22,7 @@ const LoginPage = () => {
                 </div>
             </div>
 
-            <div className="middle-row">
+            <div className="middle-row" id="scroll-style">
                 <div className="container">
                     <LoginForm setErrors={setErrors} />
                     <Link to="/register">
