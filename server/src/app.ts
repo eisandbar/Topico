@@ -1,8 +1,8 @@
 import express from 'express'
 const app = express()
-
+const IP = 'http://192.168.1.16:3080'
 const http = require('http').Server(app)
-const io = require('socket.io')(http, {cors: {origin:'http://localhost:3000'}})
+const io = require('socket.io')(http, {cors: {origin:IP}})
 import session from 'express-session'
 import passport from 'passport'
 import localStrategy from './config/localStrategy'
@@ -26,10 +26,14 @@ app.use(express.json())
 
 // Session
 app.use(session({
-    store: MongoStore.create({ mongoUrl: 'mongodb://localhost/topico' }),
     secret: 'P0l4r8e4R',
+    cookie: { maxAge: 60*60*1000 },
     resave: true,
     saveUninitialized: true,
+    store: MongoStore.create({ 
+        mongoUrl: 'mongodb://localhost/topico',
+        ttl: 24 * 60 * 60,
+    }),
 }))
 
 // Passport
@@ -80,5 +84,5 @@ io.on('connection', (socket: any) => {
 })
 
 http.listen(3080, () => {
-    console.log('listening on *: 3080')
+    console.log('listening on *: ' + IP)
 })
