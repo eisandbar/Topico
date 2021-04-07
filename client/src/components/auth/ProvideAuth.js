@@ -53,7 +53,8 @@ const useProvideAuth = () => { // Custom hook to create the user state and signi
 
     const checkAuth = async () => { // Checks whether authenticated
         const authInput = {
-            url: "/authenticate"
+            url: "/authenticate",
+            credentials: 'include',
         }
         const res = await sendGet(authInput)
         setLoggedIn(res.loggedIn)
