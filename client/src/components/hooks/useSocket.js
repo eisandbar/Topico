@@ -2,6 +2,7 @@ import { useEffect, useRef} from 'react'
 import {io} from 'socket.io-client'
 
 import { useMessages } from './useMessages'
+import {IP} from '../../index'
 
 /* 
     useSocket is a custom hook that manages the websocket when connecting to chat.
@@ -17,7 +18,7 @@ export const useSocket = ({username, roomId}) => {
 
     useEffect(() => {
         // Creates new websocket
-        socketRef.current = io()
+        socketRef.current = io(IP)
 
         // Sends data to join the room
         socketRef.current.emit("join room", {username, roomId})
