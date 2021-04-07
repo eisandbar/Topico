@@ -43,7 +43,8 @@ app.use(session({
     secret: 'P0l4r8e4R',
     cookie: { maxAge: 60*60*1000 },
     resave: true,
-    saveUninitialized: true,
+    saveUninitialized: false,
+    unset: 'destroy',
     store: MongoStore.create({ 
         mongoUrl: 'mongodb://localhost/topico',
         ttl: 24 * 60 * 60,
