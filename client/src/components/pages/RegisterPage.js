@@ -23,7 +23,7 @@ const RegisterPage = () => {
             </div>
 
             <div className="middle-row" id="scroll-style">
-                <div class="column is-one-quarter is-mobile"></div>
+                <div className="column is-one-quarter is-mobile"></div>
                 <div className="container">
                     <RegisterForm setErrors={setErrors} />
                     <Link to="/login">

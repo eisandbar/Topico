@@ -1,14 +1,29 @@
+const clientIP = 'http://localhost:3000'
+const IP = process.env.PORT || 'http://localhost:3080'
+
 import express from 'express'
 const app = express()
-const IP = 'http://192.168.1.16:3080'
+import cors from 'cors'
 const http = require('http').Server(app)
-const io = require('socket.io')(http, {cors: {origin:IP}})
 import session from 'express-session'
 import passport from 'passport'
 import localStrategy from './config/localStrategy'
 import MongoStore from 'connect-mongo'
+
 localStrategy(passport)
 
+const corsOptions = {
+    origin: clientIP,
+    optionSuccessStatus: 200,
+    credentials: true,
+}
+
+const io = require('socket.io')(http, {
+    cors: {
+        origin:clientIP,
+        methods: ["GET", "POST"]
+    }
+})
 
 import * as types from "./utils/types"
 import newSocket from "./utils/sql/newSocket"
@@ -17,7 +32,6 @@ import newMessage from "./utils/sql/newMessage"
 import findMessage from "./utils/sql/findMessage"
 import deleteSocket from "./utils/sql/deleteSocket"
 import findUserId from './utils/sql/findUserId'
-
 
 
 // Body parsing
@@ -39,6 +53,9 @@ app.use(session({
 // Passport
 app.use(passport.initialize())
 app.use(passport.session())
+
+// Cors
+app.use(cors(corsOptions))
 
 // Routes
 app.use('/', require('./routes/index'))

@@ -5,10 +5,11 @@ import {IP} from '../index'
     Returns a Promise that resolves to the parsed JSON object.
 */
 
-export const sendGet = async ({url}) => new Promise((resolve, reject) => {
+export const sendGet = async ({url, credentials}) => new Promise((resolve, reject) => {
     fetch(IP + url, { // GET from server
         method: "GET",
         headers: {"Content-Type": "application/json"},
+        credentials: credentials || 'same-origin'
     })
     .then(res => res.json())
     .then(resJson => {
