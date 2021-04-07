@@ -35,6 +35,7 @@ const useProvideAuth = () => { // Custom hook to create the user state and signi
         const loginInput = {
             data: data,
             url: "/login",
+            credentials: 'include',
         }
 
         const res = await sendPost(loginInput)
@@ -44,7 +45,8 @@ const useProvideAuth = () => { // Custom hook to create the user state and signi
 
     const signout = async () => { // This function should post to the server to terminate session
         const logoutInput = {
-            url: "/logout"
+            url: "/logout",
+            credentials: 'include',
         }
         const res = await sendGet(logoutInput)
         setLoggedIn(res.loggedIn)
