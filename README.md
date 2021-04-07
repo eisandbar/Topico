@@ -39,3 +39,5 @@ Progress:
     - passport
   - Session store with mongodb
   - Styling
+  - Sessions persist on refresh
+  - Cors instead of proxy
