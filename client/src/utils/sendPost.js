@@ -12,6 +12,7 @@ export const sendPost = async (formInput) => new Promise((resolve, reject) => {
         method: "POST",
         body: JSON.stringify(formInput.data),
         headers: {"Content-Type": "application/json"},
+        credentials: formInput.credentials || 'same-origin',
     })
     .then(res => res.json())
     .then(resJson => {

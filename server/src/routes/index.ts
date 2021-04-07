@@ -68,6 +68,7 @@ router.get('/authenticate', ensureAuthenticated)
 router.get('/logout', (req,res) => {
     req.logout() // passport function
     res.json(JSON.stringify({loggedIn: false}))
+    req.session.destroy
 })
 
 module.exports = router
