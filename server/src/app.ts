@@ -1,16 +1,23 @@
-const clientIP = 'http://localhost:3000'
-const IP = process.env.PORT || 'http://localhost:3080'
-
 import express from 'express'
 const app = express()
 import cors from 'cors'
-const http = require('http').Server(app)
+import https from 'https'
 import session from 'express-session'
 import passport from 'passport'
 import localStrategy from './config/localStrategy'
 import MongoStore from 'connect-mongo'
+import {clientIP, IP} from './utils/IP'
+import fs from 'fs'
+import path from 'path';
 
 localStrategy(passport)
+
+const serverOptions = {
+    key: fs.readFileSync(path.resolve(__dirname, 'cert/key.pem')),
+    cert: fs.readFileSync(path.resolve(__dirname, 'cert/cert.pem'))
+}
+
+const httpsServer = https.createServer(serverOptions ,app)
 
 const corsOptions = {
     origin: clientIP,
@@ -18,7 +25,7 @@ const corsOptions = {
     credentials: true,
 }
 
-const io = require('socket.io')(http, {
+const io = require('socket.io')(httpsServer, {
     cors: {
         origin:clientIP,
         methods: ["GET", "POST"]
@@ -41,7 +48,7 @@ app.use(express.json())
 // Session
 app.use(session({
     secret: 'P0l4r8e4R',
-    cookie: { maxAge: 60*60*1000 },
+    cookie: { maxAge: 60*60*1000, sameSite: 'lax', secure: true},
     resave: true,
     saveUninitialized: false,
     unset: 'destroy',
@@ -50,7 +57,7 @@ app.use(session({
         ttl: 24 * 60 * 60,
     }),
 }))
-
+app.set('trust proxy', 1)
 // Passport
 app.use(passport.initialize())
 app.use(passport.session())
@@ -101,6 +108,6 @@ io.on('connection', (socket: any) => {
 
 })
 
-http.listen(3080, () => {
+httpsServer.listen(3080, () => {
     console.log('listening on *: ' + IP)
 })
