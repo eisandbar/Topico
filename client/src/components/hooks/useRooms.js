@@ -28,17 +28,10 @@ export const useRooms = () => {
 
 
     // Function POSTs roomname to the server and gets a new room object as a result
-    const createRoom = async (roomname) => { 
-        await sendPost({
+    const createRoom = (roomname) => { 
+        sendPost({
             url: "/newRoom",
             data: {roomname}
-        }).forEach(room => { // Formats res data into room objects. forEach since only expecting 1 element
-            const newRoom = {
-                id: room.id,
-                name: room.name,
-                icon: room.icon
-            }
-            setRooms(rooms => [...rooms, newRoom])
         })
     }
 

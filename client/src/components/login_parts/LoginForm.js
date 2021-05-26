@@ -16,8 +16,8 @@ import { useUser } from '../user/ProvideUser'
 */
 
 const LoginForm = (props) => {
-    const email = useFormInput("Tester@mail")
-    const password = useFormInput("12345678")
+    const email = useFormInput("")
+    const password = useFormInput("")
     const history = useHistory()
     const auth = useAuth()
     const user = useUser()

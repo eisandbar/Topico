@@ -10,6 +10,7 @@ import { useUser } from "../user/ProvideUser"
 import NavBar from "../chat_parts/NavBar"
 
 import '../../sass/roomPage.scss'
+import CreateRoom from "../chat_parts/CreateRoom"
 
 /* 
     Room page component.
@@ -18,7 +19,7 @@ import '../../sass/roomPage.scss'
 */
 
 const RoomPage = (props) => {
-    const [rooms,  ] = useRooms()
+    const [rooms,  createRoom] = useRooms()
     const auth = useAuth()
     const {user} = useUser()
     const [display, setDisplay] = useState("is-hidden-mobile")
@@ -49,8 +50,11 @@ const RoomPage = (props) => {
                 <div className="column main-content rooms">
                     <div className="rooms" id="scrollbar">
                         <RoomContainer rooms={rooms} />
+                        
+                        <CreateRoom createRoom={createRoom} />
                     </div>
                 </div>
+                
 
                 <div className="column has-background-primary-light is-hidden-mobile is-3">
                 </div>

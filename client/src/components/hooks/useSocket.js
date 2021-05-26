@@ -2,7 +2,7 @@ import { useEffect, useRef} from 'react'
 import {io} from 'socket.io-client'
 
 import { useMessages } from './useMessages'
-import {IP} from '../../index'
+import {IP} from '../../utils/IP'
 
 /* 
     useSocket is a custom hook that manages the websocket when connecting to chat.

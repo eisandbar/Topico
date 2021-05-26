@@ -11,10 +11,10 @@ import useFormInput from '../hooks/useFormInput'
 */
 
 const RegisterForm = (props) => {
-    const username = useFormInput("as")
-    const email = useFormInput("asas@a")
-    const password = useFormInput("12345678")
-    const password2 = useFormInput("12345678")
+    const username = useFormInput("")
+    const email = useFormInput("")
+    const password = useFormInput("")
+    const password2 = useFormInput("")
     const history = useHistory()
 
     const handleSubmit = async (e) => {
