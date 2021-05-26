@@ -54,13 +54,18 @@ router.get('/getRooms', async (req, res) => {
 })
 
 router.post('/newRoom', async (req, res) => {
-    const roomId = await newRoom(req.body.roomname)
-    const room: types.room = {
-        roomId,
-        roomname: req.body.roomname,
-        icon: undefined,
+    try {
+        const roomId = await newRoom(req.body.roomname)
+        const room: types.room = {
+            roomId,
+            roomname: req.body.roomname,
+            icon: undefined,
+        }
+        res.json(JSON.stringify({rooms: [room]}))
+    } catch(e) {
+        console.error(e)
     }
-    res.json(JSON.stringify({rooms: [room]}))
+    
 })
 
 router.get('/authenticate', ensureAuthenticated)
@@ -69,6 +74,10 @@ router.get('/logout', (req,res) => {
     req.logout() // passport function
     res.json(JSON.stringify({loggedIn: false}))
     req.session.destroy
+})
+
+router.get('/', (req, res) => {
+    res.send('Welcome')
 })
 
 module.exports = router
