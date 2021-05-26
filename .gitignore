@@ -90,3 +90,6 @@ lerna-debug.log
 .DS_Store
 Thumbs.db
 server/src/utils/sql/myCon.ts
+*.pem
+server/src/utils/IP.ts
+client/src/utils/IP.js
