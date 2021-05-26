@@ -7,7 +7,7 @@ import Room from './Room'
 
 const RoomContainer = (props) => {
     return (
-        <div className="room-container">
+        <div>
             <ul>
                 {props.rooms.map((room) => <Room key={room.id} room={room}/>)}
             </ul>
