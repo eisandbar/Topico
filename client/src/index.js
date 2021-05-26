@@ -20,9 +20,6 @@ import { PrivateRoute } from './components/auth/PrivateRoute';
 import { ProvideAuth } from './components/auth/ProvideAuth';
 import { ProvideUser } from './components/user/ProvideUser';
 
-export const IP = "http://localhost:3080"
-
-
 const Routing = ()  => {
     return (
         <ProvideAuth>

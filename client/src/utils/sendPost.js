@@ -1,5 +1,5 @@
 import fetch from "node-fetch"
-import {IP} from '../index'
+import {IP} from './IP'
 
 /* 
     sendPost function POSTs to the server.
@@ -12,7 +12,7 @@ export const sendPost = async (formInput) => new Promise((resolve, reject) => {
         method: "POST",
         body: JSON.stringify(formInput.data),
         headers: {"Content-Type": "application/json"},
-        credentials: formInput.credentials || 'same-origin',
+        credentials: 'include',
     })
     .then(res => res.json())
     .then(resJson => {
