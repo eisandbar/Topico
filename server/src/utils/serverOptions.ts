@@ -6,4 +6,5 @@ const serverOptions = {
     cert: fs.readFileSync(path.resolve(__dirname, 'cert/cert.pem'))
 }
 
+
 export default serverOptions
