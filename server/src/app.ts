@@ -3,19 +3,14 @@ const app = express()
 import cors from 'cors'
 import https from 'https'
 import session from 'express-session'
+import MongoStore from 'connect-mongo'
 import passport from 'passport'
 import localStrategy from './config/localStrategy'
-import MongoStore from 'connect-mongo'
-import {clientIP, IP} from './utils/IP'
-import fs from 'fs'
-import path from 'path';
 
 localStrategy(passport)
 
-const serverOptions = {
-    key: fs.readFileSync(path.resolve(__dirname, 'cert/key.pem')),
-    cert: fs.readFileSync(path.resolve(__dirname, 'cert/cert.pem'))
-}
+import {clientIP, IP} from './utils/IP'
+import serverOptions from './utils/serverOptions'
 
 const httpsServer = https.createServer(serverOptions ,app)
 
