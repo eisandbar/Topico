@@ -93,3 +93,4 @@ server/src/utils/sql/myCon.ts
 *.pem
 server/src/utils/IP.ts
 client/src/utils/IP.js
+server/src/utils/serverOptions.ts
