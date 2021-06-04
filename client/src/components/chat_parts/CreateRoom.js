@@ -8,6 +8,7 @@ const CreateRoom = (props) => {
     }
 
     const handleSubmit = async (e) => {
+        e.preventDefault();
         props.createRoom(roomName.slice())
         setRoomName("")
     }
