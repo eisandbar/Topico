@@ -28,11 +28,13 @@ export const useRooms = () => {
 
 
     // Function POSTs roomname to the server and gets a new room object as a result
-    const createRoom = (roomname) => { 
-        sendPost({
+    const createRoom = async (roomname) => { 
+        const res = await sendPost({
             url: "/newRoom",
             data: {roomname}
         })
+        setRooms([{id: res.rooms[0].roomId, roomname: res.rooms[0].roomname}, ...rooms])
+
     }
 
     return [rooms, createRoom]
