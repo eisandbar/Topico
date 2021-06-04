@@ -9,7 +9,7 @@
 /coverage
 
 # production
-/build
+# /build # Adding to git so that i can build on pc instead of vps
 
 # misc
 .DS_Store
